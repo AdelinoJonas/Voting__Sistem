@@ -16,7 +16,10 @@ module.exports = {
                 title: polls[i].title,
                 questionDescription: polls[i].questionDescription,
                 startDate: polls[i].startDate,
-                endDate: polls[i].endDate
+                endDate: polls[i].endDate,
+                idOption: options[i].idOption,
+                optionDescription: options[i].optionDescription,
+                totalVotes: options[i].totalVotes
             })
         }
         res.json(json);
