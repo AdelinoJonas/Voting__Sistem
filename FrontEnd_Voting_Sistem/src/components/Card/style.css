@@ -1,0 +1,140 @@
+.cardContent {
+    border-radius: 50% 10% /25%;
+    background-color: orangered;
+    width: 250px;
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+}
+
+.container-title {
+    width: 100%;
+}
+
+.titleRegister {
+    width: 100%;
+}
+
+.titleRegister h1 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.createdRegister {
+    margin-top: 2rem;
+    margin-left: 30%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: brown;
+    width: 70%;
+    text-align: center;
+    border-radius: 10px;
+    line-height: 2rem;
+}
+
+.createdRegister h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-align: right;
+}
+
+.createdRegister h2 {
+    font-size: 1.3rem;
+    font-weight: 300;
+    text-align: right;
+    padding-left: 5px;
+}
+
+.showdescription {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    margin: 10px 0 10px 0;
+    width: 90%;
+    height: max-content;
+}
+
+.textDescription {
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.shedule {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.shedule section {
+    background-color: orange;
+    color: black;
+    border-radius: 10px;
+    width: max-content;
+    padding: 5px 10px 5px 10px;
+}
+
+.spanDate {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.optionsContainer {
+    width: 90%;
+}
+
+.optionsContainer section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0px 20px 0px 20px;
+    line-height: 3rem;
+    background-color: orange;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+}
+
+.optionsContainer section h1 {
+    width: 50%;
+    font-size: 1.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.optionsContainer section h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.buttonVote {
+    all: unset;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 40%;
+    height: 30px;
+    background-color: brown;
+    border-radius: 50% 10% /25%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
