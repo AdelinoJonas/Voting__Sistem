@@ -20,7 +20,7 @@ function Home() {
   return (
     <div className="container-home">
       <section className="section-polls">
-        <div className="cardpoll">
+        <div className="cardPoll">
           {/*{polls.map((poll) => (
           <Card 
             key={poll.id}

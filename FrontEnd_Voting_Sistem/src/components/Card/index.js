@@ -49,19 +49,214 @@ function Card({
         </div>
         <div className="optionsContainer">
           <section>
-            <h1>Sim </h1>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h1>
             <h2> (12 votos)</h2>
           </section>
           <section>
-            <h1>Não </h1>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
             <h2> (3 votos)</h2>
           </section>
           <section>
-            <h1>Talvez </h1>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
             <h2> (4 votos)</h2>
           </section>
         </div>
-        <button className="buttonVote">VOTAR</button>
+        <button className="buttonVote">ABRIR</button>
+      </div>
+      <div className="cardContent">
+        <div className="container-title">
+          <div className="titleRegister">
+            <div className="createdRegister">
+              <h3>Criado em:</h3>
+              <h2>17/10/2022</h2>
+            </div>
+            <h1>Positividade</h1>
+          </div>
+          <div className="shedule">
+            <section>
+              <h3>Data de início:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+            <section>
+              <h3>Data de Término:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+          </div>
+        </div>
+        <div className="showdescription">
+          <h2 className="textDescription">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum vitae magni omnis placeat vero aut quas quibusdam officiis cupiditate ut, itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h2>
+        </div>
+        <div className="optionsContainer">
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h1>
+            <h2> (12 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (3 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (4 votos)</h2>
+          </section>
+        </div>
+        <button className="buttonVote">ABRIR</button>
+      </div>
+      <div className="cardContent">
+        <div className="container-title">
+          <div className="titleRegister">
+            <div className="createdRegister">
+              <h3>Criado em:</h3>
+              <h2>17/10/2022</h2>
+            </div>
+            <h1>Positividade</h1>
+          </div>
+          <div className="shedule">
+            <section>
+              <h3>Data de início:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+            <section>
+              <h3>Data de Término:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+          </div>
+        </div>
+        <div className="showdescription">
+          <h2 className="textDescription">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum vitae magni omnis placeat vero aut quas quibusdam officiis cupiditate ut, itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h2>
+        </div>
+        <div className="optionsContainer">
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h1>
+            <h2> (12 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (3 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (4 votos)</h2>
+          </section>
+        </div>
+        <button className="buttonVote">ABRIR</button>
+      </div>
+      <div className="cardContent">
+        <div className="container-title">
+          <div className="titleRegister">
+            <div className="createdRegister">
+              <h3>Criado em:</h3>
+              <h2>17/10/2022</h2>
+            </div>
+            <h1>Positividade</h1>
+          </div>
+          <div className="shedule">
+            <section>
+              <h3>Data de início:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+            <section>
+              <h3>Data de Término:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+          </div>
+        </div>
+        <div className="showdescription">
+          <h2 className="textDescription">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum vitae magni omnis placeat vero aut quas quibusdam officiis cupiditate ut, itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h2>
+        </div>
+        <div className="optionsContainer">
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h1>
+            <h2> (12 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (3 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (4 votos)</h2>
+          </section>
+        </div>
+        <button className="buttonVote">ABRIR</button>
+      </div>
+      <div className="cardContent">
+        <div className="container-title">
+          <div className="titleRegister">
+            <div className="createdRegister">
+              <h3>Criado em:</h3>
+              <h2>17/10/2022</h2>
+            </div>
+            <h1>Positividade</h1>
+          </div>
+          <div className="shedule">
+            <section>
+              <h3>Data de início:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+            <section>
+              <h3>Data de Término:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+          </div>
+        </div>
+        <div className="showdescription">
+          <h2 className="textDescription">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum vitae magni omnis placeat vero aut quas quibusdam officiis cupiditate ut, itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h2>
+        </div>
+        <div className="optionsContainer">
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h1>
+            <h2> (12 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (3 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (4 votos)</h2>
+          </section>
+        </div>
+        <button className="buttonVote">ABRIR</button>
+      </div>
+      <div className="cardContent">
+        <div className="container-title">
+          <div className="titleRegister">
+            <div className="createdRegister">
+              <h3>Criado em:</h3>
+              <h2>17/10/2022</h2>
+            </div>
+            <h1>Positividade</h1>
+          </div>
+          <div className="shedule">
+            <section>
+              <h3>Data de início:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+            <section>
+              <h3>Data de Término:</h3>
+              <h2 className="spanDate">17/10/2022</h2>
+            </section>
+          </div>
+        </div>
+        <div className="showdescription">
+          <h2 className="textDescription">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum vitae magni omnis placeat vero aut quas quibusdam officiis cupiditate ut, itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h2>
+        </div>
+        <div className="optionsContainer">
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid.</h1>
+            <h2> (12 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (3 votos)</h2>
+          </section>
+          <section>
+            <h1>itaque odio enim temporibus eos? Cumque earum inventore nobis aliquid. </h1>
+            <h2> (4 votos)</h2>
+          </section>
+        </div>
+        <button className="buttonVote">ABRIR</button>
       </div>
     </>
   );
