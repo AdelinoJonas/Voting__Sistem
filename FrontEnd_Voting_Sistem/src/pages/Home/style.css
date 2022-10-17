@@ -1,0 +1,11 @@
+.container-home {
+  background: linear-gradient(270deg, rgba(29, 253, 243, 1) 0%, rgba(92, 117, 173, 1) 82%);
+  display: flex;
+  align-items: center;
+}
+
+.section-polls {
+  background-color: #FFF;
+  width: 100%;
+  border-radius: 30px;
+}
