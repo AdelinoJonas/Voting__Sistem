@@ -101,4 +101,13 @@ module.exports = {
     }
     res.json(json);
   },
+  deletePoll: async (req, res) => {
+    let json = {
+      error: '',
+      result: {}
+    };
+    await pollService.deletePoll(req.params.id);
+
+    res.json(json);
+  }
 }

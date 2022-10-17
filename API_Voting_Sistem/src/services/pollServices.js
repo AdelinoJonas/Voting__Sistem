@@ -12,7 +12,6 @@ module.exports = {
         }
         resolve(results);
         console.log(results);
-        db.end();
       });
     });
   },
@@ -69,7 +68,7 @@ module.exports = {
 
       const sql = 'UPDATE startDate, endDate, title, questionDescription, option1, option2, option3, votesOption1, votesOption2,votesOption3 FROM poll_options as o left outer JOIN options_votes as v ON o.idOption = v.idVotes left JOIN  poll_questions as q ON o.idOption = q.id WHERE id = ?';
 
-      db.query(sql, [startDate, endDate, title, questionDescription], (error, results, fields) => {
+      db.query(sql, [startDate, endDate, title, questionDescription], (error, results) => {
         if (error) {
           reject(error);
           return;
@@ -77,6 +76,20 @@ module.exports = {
         resolve(results);
         console.log(sql);
       })
+    });
+  },
+  deletePoll: (id) => {
+    return new Promise((resolve, reject) => {
+      const sql = 'DELETE FROM poll_options WHERE idOption = ?';
+
+      db.query(sql, [id], (error, results) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve(results);
+        console.log(results);
+      });
     });
   },
 };
