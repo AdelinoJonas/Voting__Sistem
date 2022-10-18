@@ -54,15 +54,15 @@ function CardRegisterPoll({ setOpenModal }) {
   };
 
   return (
-    <div className="backgroundModal">
-      <div className="modalContent">
+    <div className="backgroundRegister">
+      <div className="registerContent">
         <form
           onSubmit={(e) => {
             handleSubmit(e);
           }}
         >
-          <div className="container-titleModal">
-            <div className="titleRegisterModal">
+          <div className="container-titleRegister">
+            <div className="titleRegisterRegister">
               <img
                 src={closeIcon}
                 className="closeButton"
@@ -70,17 +70,18 @@ function CardRegisterPoll({ setOpenModal }) {
                 onClick={handleCloseModal}
               />
               <div className="postPut">
-                <button className="post">POSTAR</button>
+                <button className="post">CADASTRAR</button>
                 <button className="put">EDITAR</button>
               </div>
-              <div className="sheduleModal">
+              <div className="sheduleRegister">
                 <section>
                   <label>Data de início:</label>
                   <input
-                    className="spanDateModal"
+                    className="spanDateRegister"
                     type="text"
                     value={startDate}
                     required
+                    placeholder="DD/MM/AAAA"
                     onChange={(e) => {
                       handleStartChange(e);
                     }}
@@ -89,10 +90,11 @@ function CardRegisterPoll({ setOpenModal }) {
                 <section>
                   <label>Data de Término: </label>
                   <input
-                    className="spanDateModal"
+                    className="spanDateRegister"
                     type="text"
                     value={endDate}
                     required
+                    placeholder="DD/MM/AAAA"
                     onChange={(e) => {
                       handleEndChange(e);
                     }}
@@ -100,11 +102,12 @@ function CardRegisterPoll({ setOpenModal }) {
                 </section>
               </div>
               <div className="centerTitle">
-                <label>Título da enquete:</label>
+                <label>Título da enquete: </label>
                 <input
                   type="text"
                   value={title}
                   required
+                  placeholder="TÍTULO"
                   onChange={(e) => {
                     handleTitleChange(e);
                   }}
@@ -112,18 +115,19 @@ function CardRegisterPoll({ setOpenModal }) {
               </div>
             </div>
           </div>
-          <div className="showdescriptionModal">
+          <div className="showDescriptionRegister">
             <label>Descreva a enquete:</label>
             <textarea
               type="text"
               value={questionDescription}
               required
+              placeholder="Descrição da Enquete."
               onChange={(e) => {
                 handleDescriptionChange(e);
               }}
             />
           </div>
-          <div className="optionsContainerModal">
+          <div className="optionsContainerRegister">
             <section>
               <label>Opção 1:</label>
               <br />
@@ -131,6 +135,7 @@ function CardRegisterPoll({ setOpenModal }) {
                 type="text"
                 value={option1}
                 required
+                placeholder="Descrição opção 1"
                 onChange={(e) => {
                   handleOption1Change(e);
                 }}
@@ -143,6 +148,7 @@ function CardRegisterPoll({ setOpenModal }) {
                 type="text"
                 value={option2}
                 required
+                placeholder="Descrição opção 2"
                 onChange={(e) => {
                   handleOption2Change(e);
                 }}
@@ -155,16 +161,17 @@ function CardRegisterPoll({ setOpenModal }) {
                 type="text"
                 value={option3}
                 required
+                placeholder="Descrição opção 3"
                 onChange={(e) => {
                   handleOption3Change(e);
                 }}
               />
             </section>
           </div>
-          <button type="submit" className="buttonVote">
+        </form>
+          <button type="submit" className="buttonRegister">
             POSTAR ENQUETE
           </button>
-        </form>
       </div>
     </div>
   );
