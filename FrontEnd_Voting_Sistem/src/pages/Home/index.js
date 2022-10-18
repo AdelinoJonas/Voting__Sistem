@@ -1,8 +1,13 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
+import CardRegisterPoll from "../../components/CardRegisterPoll";
+// import { UserContext } from "../../contexts/userContext";
 import "./style.css";
 
 function Home() {
+  const [openModal, setOpenModal] = useState(false);
+  console.log(openModal);
   const [polls, setPolls] = useState([]);
   console.log(polls);
   useEffect(() => {
@@ -17,11 +22,18 @@ function Home() {
     loadPollData();
   }, []);
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
   return (
     <div className="container-home">
       <div className="headerHome">
-        <button className="registerPoll">CRIAR ENQUETE</button>
+        <button className="registerPoll" onClick={handleOpenModal}>
+          CRIAR ENQUETE
+        </button>
       </div>
+      {openModal && <CardRegisterPoll setOpenModal={setOpenModal} />}
       <section className="section-polls">
         <div className="cardPoll">
           {/*{polls.map((poll) => (

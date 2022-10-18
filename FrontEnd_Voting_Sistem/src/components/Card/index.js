@@ -1,6 +1,8 @@
 import "./style.css";
 import { useState } from "react";
 import FullPollCard from "../FullPollCard";
+// import { UserContext } from "../../contexts/userContext";
+// import Home from "../../pages/Home";
 
 const polls = [
   {
@@ -36,11 +38,15 @@ const polls = [
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
-    questionDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.?",
+    questionDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.?",
     title: "Acertividade",
-    option1: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    option2: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    option3: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
+    option1:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
+    option2:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
+    option3:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
     votesOption1: "12",
     votesOption2: "3",
     votesOption3: "4",
@@ -50,11 +56,15 @@ const polls = [
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
-    questionDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.?",
+    questionDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.?",
     title: "Acertividade",
-    option1: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus!",
-    option2: "Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    option3: "Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
+    option1:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus!",
+    option2:
+      "Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
+    option3:
+      "Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
     votesOption1: "12",
     votesOption2: "3",
     votesOption3: "4",
@@ -103,14 +113,7 @@ const polls = [
   },
 ];
 
-function Card({
-  registerDate,
-  startDate,
-  endDate,
-  questionDescription,
-  title,
-  item,
-}) {
+function Card() {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -127,18 +130,18 @@ function Card({
                   <h3>Criado em:</h3>
                   <h2>{poll.registerDate}</h2>
                 </div>
-              <div className="shedule">
-                <section>
-                  <h3>Data de início:</h3>
-                  <h2 className="spanDate">{poll.startDate}</h2>
-                </section>
-                <section>
-                  <h3>Data de Término:</h3>
-                  <h2 className="spanDate">{poll.endDate}</h2>
-                </section>
+                <div className="shedule">
+                  <section>
+                    <h3>Data de início:</h3>
+                    <h2 className="spanDate">{poll.startDate}</h2>
+                  </section>
+                  <section>
+                    <h3>Data de Término:</h3>
+                    <h2 className="spanDate">{poll.endDate}</h2>
+                  </section>
+                </div>
               </div>
-              </div>
-                <h1 className="titleCard">{poll.title}</h1>
+              <h1 className="titleCard">{poll.title}</h1>
             </div>
             <div className="showdescription">
               <h2 className="textDescription">{poll.questionDescription}</h2>
@@ -163,7 +166,7 @@ function Card({
           </div>
         );
       })}
-      {openModal && <FullPollCard setOpenModal={setOpenModal} />}
+      {openModal && <FullPollCard setOpenModal={setOpenModal}/>}
     </>
   );
 }
