@@ -19,6 +19,9 @@ function Home() {
 
   return (
     <div className="container-home">
+      <div className="headerHome">
+        <button className="registerPoll">CRIAR ENQUETE</button>
+      </div>
       <section className="section-polls">
         <div className="cardPoll">
           {/*{polls.map((poll) => (
