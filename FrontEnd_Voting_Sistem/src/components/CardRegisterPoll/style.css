@@ -2,11 +2,12 @@
     background-color: rgba(0, 0, 0, 0.658);
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 103%;
     margin-top: -120px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .registerContent {
@@ -50,6 +51,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 25px;
 }
 
 .post{
@@ -92,6 +94,31 @@
 }
 .put:hover{
     background-color: orchid;
+}
+.delete{
+    all: unset;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 25%;
+    height: 30px;
+    background-color: rgb(201, 9, 9);
+    border-radius: 0 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    -webkit-box-shadow: -7px 14px 27px -4px rgba(0, 0, 0, 0.48);
+    -moz-box-shadow: -7px 14px 27px -4px rgba(0, 0, 0, 0.48);
+    box-shadow: -7px 14px 27px -4px rgba(0, 0, 0, 0.48);
+}
+
+.delete img{
+    width: 15px;
+    height: 20px;
+}
+.delete:hover{
+    background-color: rgb(219, 88, 88);
 }
 
 .titleRegisterRegister h1 {

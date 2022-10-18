@@ -1,5 +1,5 @@
 import "./style.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import FullPollCard from "../FullPollCard";
 // import { UserContext } from "../../contexts/userContext";
 // import Home from "../../pages/Home";
@@ -118,6 +118,7 @@ function Card() {
 
   const handleOpenModal = () => {
     setOpenModal(true);
+    console.log(openModal);
   };
   return (
     <>
@@ -166,7 +167,7 @@ function Card() {
           </div>
         );
       })}
-      {openModal && <FullPollCard setOpenModal={setOpenModal}/>}
+      {openModal && <FullPollCard setOpenModal={setOpenModal} openModal={openModal}/>}
     </>
   );
 }

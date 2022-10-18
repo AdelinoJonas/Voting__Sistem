@@ -10,17 +10,17 @@ function Home() {
   console.log(openModal);
   const [polls, setPolls] = useState([]);
   console.log(polls);
-  useEffect(() => {
-    async function loadPollData() {
-      const response = await fetch("http://localhost:3000/api/polls", {
-        method: "GET",
-      });
-      const { results } = await response.json();
-      setPolls(results);
-      console.log(response);
-    }
-    loadPollData();
-  }, []);
+  // useEffect(() => {
+  //   async function loadPollData() {
+  //     const response = await fetch("http://localhost:3000/api/polls", {
+  //       method: "GET",
+  //     });
+  //     const { results } = await response.json();
+  //     setPolls(results);
+  //     console.log(response);
+  //   }
+  //   loadPollData();
+  // }, []);
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -33,7 +33,7 @@ function Home() {
           CRIAR ENQUETE
         </button>
       </div>
-      {openModal && <CardRegisterPoll setOpenModal={setOpenModal} />}
+      {openModal && <CardRegisterPoll setOpenModal={setOpenModal} openModal = {setOpenModal}/>}
       <section className="section-polls">
         <div className="cardPoll">
           {/*{polls.map((poll) => (

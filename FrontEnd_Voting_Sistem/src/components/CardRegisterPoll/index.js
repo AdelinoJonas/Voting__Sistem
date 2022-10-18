@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
+import deletePoll from "../../assets/delete.svg";
 
-function CardRegisterPoll({ setOpenModal }) {
+const defaultValuesForm = {
+  startDate: "",
+  endDate: "",
+  questionDescription: "",
+  title: "",
+  option1: "",
+  option2: "",
+  option3: "",
+};
+
+function CardRegisterPoll({ openModal, setOpenModal }) {
   const handleCloseModal = () => {
     setOpenModal(false);
+    console.log(openModal);
   };
-
+  const [activeButton, setActiveButton] = useState("register");
+  const [data, setData] = useState(defaultValuesForm);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [questionDescription, setQuestionDescription] = useState("");
@@ -72,6 +85,7 @@ function CardRegisterPoll({ setOpenModal }) {
               <div className="postPut">
                 <button className="post">CADASTRAR</button>
                 <button className="put">EDITAR</button>
+                <button className="delete">EXCLUIR</button>
               </div>
               <div className="sheduleRegister">
                 <section>
@@ -169,9 +183,9 @@ function CardRegisterPoll({ setOpenModal }) {
             </section>
           </div>
         </form>
-          <button type="submit" className="buttonRegister">
-            POSTAR ENQUETE
-          </button>
+        <button type="submit" className="buttonRegister">
+          POSTAR ENQUETE
+        </button>
       </div>
     </div>
   );
