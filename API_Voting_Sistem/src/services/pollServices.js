@@ -33,21 +33,21 @@ module.exports = {
       });
     });
   },
-  postQuestion: (startDate, endDate, title, questionDescription) => {
-    return new Promise((resolve, reject) => {
+  // postQuestion: (startDate, endDate, title, questionDescription) => {
+  //   return new Promise((resolve, reject) => {
 
-      const sql = 'INSERT INTO poll_questions (startDate, endDate, title, questionDescription) VALUES(?,?,?,?)';
+  //     const sql = 'insert into poll_questions (startDate, endDate, title, questionDescription) values (?,?,?,?)';
 
-      db.query(sql, [startDate, endDate, title, questionDescription], (error, results) => {
-        if (error) {
-          reject(error);
-          return;
-        }
-        resolve(results.postQuestionid);
-        console.log(results);
-      })
-    });
-  },
+  //     db.query(sql, [startDate, endDate, title, questionDescription], (error, results) => {
+  //       if (error) {
+  //         reject(error);
+  //         return;
+  //       }
+  //       resolve(results);
+  //       console.log(results);
+  //     });
+  //   });
+  // },
   postOption: (option1, option2, option3) => {
     return new Promise((resolve, reject) => {
 

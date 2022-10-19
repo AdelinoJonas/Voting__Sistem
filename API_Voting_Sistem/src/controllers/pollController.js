@@ -1,4 +1,5 @@
 const pollService = require('../services/pollServices');
+const db = require('../db');
 
 module.exports = {
   getAll: async (req, res) => {
@@ -29,30 +30,25 @@ module.exports = {
     res.json(json);
   },
   postQuestion: async (req, res) => {
-    let json = {
-      error: '',
-      result: {}
-    };
+    const { startDate, endDate, title, questionDescription } = req.body;
 
-    let startDate = req.body.startDate;
-    let endDate = req.body.endDate;
-    let title = req.body.title;
-    let questionDescription = req.body.questionDescription;
-
-    if (title && questionDescription) {
-      await pollService.postQuestion(startDate, endDate, title, questionDescription);
-      json.result = {
-        id,
-        startDate,
-        endDate,
-        title,
-        questionDescription
-      };
-    } else {
-      json.error = 'Todos os campos são Obrigatórios!';
+    if (!nome) {
+        return res.status(400).json("O campo nome é obrigatório.");
     }
-    res.json(json);
-  },
+
+    try {
+        const query = 'insert into autores (nome, idade) values ($1, $2)';
+        const autor = await conexao.query(query, [nome, idade]);
+
+        if (autor.rowCount === 0) {
+            return res.status(400).json('Não foi possivel cadastrar o autor');
+        }
+
+        return res.status(200).json('Autor cadastrado com sucesso.')
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+},
   postOption: async (req, res) => {
     let json = {
       error: '',
@@ -107,7 +103,7 @@ module.exports = {
       result: {}
     };
     await pollService.deletePoll(req.params.id);
-
+    json.result = {result:"Enquete deleteda com sucesso!"};
     res.json(json);
   }
 }
