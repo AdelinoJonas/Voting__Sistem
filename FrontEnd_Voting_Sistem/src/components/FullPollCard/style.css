@@ -30,6 +30,13 @@
     width: 100%;
 }
 
+.container-titleModal h1{
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 15px;
+}
+
 .titleRegisterModal {
     width: 100%;
 }
@@ -39,6 +46,36 @@
     margin-left: 90%;
     margin-top: 1rem;
     cursor: pointer;
+}
+
+.delete{
+    all: unset;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 25%;
+    height: 30px;
+    background-color: rgb(201, 9, 9);
+    border-radius: 0 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    -webkit-box-shadow: -7px 14px 27px -4px rgba(0, 0, 0, 0.48);
+    -moz-box-shadow: -7px 14px 27px -4px rgba(0, 0, 0, 0.48);
+    box-shadow: -7px 14px 27px -4px rgba(0, 0, 0, 0.48);
+}
+
+.delete:hover{
+    background-color: rgb(219, 88, 88);
+}
+
+.deleteBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
 }
 
 .titleRegisterModal h1 {
@@ -92,6 +129,14 @@
     text-align: justify;
 }
 
+.textDescriptionModal{
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    padding: 5px
+}
+
 .sheduleModal {
     width: 100%;
     display: flex;
@@ -104,8 +149,12 @@
     background-color: orange;
     color: black;
     border-radius: 10px;
-    width: max-content;
+    width: 45%;
     padding: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .spanDateModal {

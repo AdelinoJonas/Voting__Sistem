@@ -85,7 +85,6 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <div className="postPut">
                 <button className="post">CADASTRAR</button>
                 <button className="put">EDITAR</button>
-                <button className="delete">EXCLUIR</button>
               </div>
               <div className="sheduleRegister">
                 <section>
