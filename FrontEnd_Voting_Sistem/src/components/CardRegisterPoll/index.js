@@ -1,69 +1,44 @@
 import React, { useState } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
-import deletePoll from "../../assets/delete.svg";
-
-const defaultValuesForm = {
-  startDate: "",
-  endDate: "",
-  questionDescription: "",
-  title: "",
-  option1: "",
-  option2: "",
-  option3: "",
-};
 
 function CardRegisterPoll({ openModal, setOpenModal }) {
-  const handleCloseModal = () => {
-    setOpenModal(false);
-    console.log(openModal);
-  };
-  const [activeButton, setActiveButton] = useState("register");
-  const [data, setData] = useState(defaultValuesForm);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [questionDescription, setQuestionDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const [option1, setOption1] = useState("");
-  const [option2, setOption2] = useState("");
-  const [option3, setOption3] = useState("");
+  const [startData, setStartData] = useState({
+    startDate: "",
+    endDate: "",
+    questionDescription: "",
+    title: "",
+    option1: "",
+    option2: "",
+    option3: "",
+  });
 
-  const handleStartChange = (e) => {
-    setStartDate(e.target.value);
+  const data = startData;
+
+  const handleDataChange = (e) => {
+    setStartData(e.target.data);
   };
-  const handleEndChange = (e) => {
-    setEndDate(e.target.value);
-  };
-  const handleDescriptionChange = (e) => {
-    setQuestionDescription(e.target.value);
-  };
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-  const handleOption1Change = (e) => {
-    setOption1(e.target.value);
-  };
-  const handleOption2Change = (e) => {
-    setOption2(e.target.value);
-  };
-  const handleOption3Change = (e) => {
-    setOption3(e.target.value);
-  };
+
   const handleSubmit = (e) => {
     if (
-      !startDate &&
-      !endDate &&
-      !questionDescription &&
-      !title &&
-      !option1 &&
-      !option2 &&
-      !option3
+      !data.startDate &&
+      !data.endDate &&
+      !data.questionDescription &&
+      !data.title &&
+      !data.option1 &&
+      !data.option2 &&
+      !data.option3
     ) {
       alert("Totos os campos são obrigatórios!");
     } else {
       alert("Enquete cadastrada com Sucesso!");
     }
     e.preventDefault();
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    console.log(openModal);
   };
 
   return (
@@ -89,13 +64,14 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
                 <section>
                   <label>Data de início:</label>
                   <input
+                    id="startDate"
                     className="spanDateRegister"
-                    type="text"
-                    value={startDate}
+                    type="date"
+                    value={data.startDate}
                     required
                     placeholder="DD/MM/AAAA"
                     onChange={(e) => {
-                      handleStartChange(e);
+                      handleDataChange(e);
                     }}
                   />
                 </section>
@@ -103,12 +79,12 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
                   <label>Data de Término: </label>
                   <input
                     className="spanDateRegister"
-                    type="text"
-                    value={endDate}
+                    type="date"
+                    value={data.endDate}
                     required
                     placeholder="DD/MM/AAAA"
                     onChange={(e) => {
-                      handleEndChange(e);
+                      handleDataChange(e);
                     }}
                   />
                 </section>
@@ -117,11 +93,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
                 <label>Título da enquete: </label>
                 <input
                   type="text"
-                  value={title}
+                  value={data.title}
                   required
                   placeholder="TÍTULO"
                   onChange={(e) => {
-                    handleTitleChange(e);
+                    handleDataChange(e);
                   }}
                 />
               </div>
@@ -131,11 +107,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
             <label>Descreva a enquete:</label>
             <textarea
               type="text"
-              value={questionDescription}
+              value={data.questionDescription}
               required
               placeholder="Descrição da Enquete."
               onChange={(e) => {
-                handleDescriptionChange(e);
+                handleDataChange(e);
               }}
             />
           </div>
@@ -145,11 +121,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <br />
               <input
                 type="text"
-                value={option1}
+                value={data.option1}
                 required
                 placeholder="Descrição opção 1"
                 onChange={(e) => {
-                  handleOption1Change(e);
+                  handleDataChange(e);
                 }}
               />
             </section>
@@ -158,11 +134,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <br />
               <input
                 type="text"
-                value={option2}
+                value={data.option2}
                 required
                 placeholder="Descrição opção 2"
                 onChange={(e) => {
-                  handleOption2Change(e);
+                  handleDataChange(e);
                 }}
               />
             </section>
@@ -171,11 +147,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <br />
               <input
                 type="text"
-                value={option3}
+                value={data.option3}
                 required
                 placeholder="Descrição opção 3"
                 onChange={(e) => {
-                  handleOption3Change(e);
+                  handleDataChange(e);
                 }}
               />
             </section>

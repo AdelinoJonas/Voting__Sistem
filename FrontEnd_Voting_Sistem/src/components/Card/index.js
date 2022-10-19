@@ -115,11 +115,19 @@ const polls = [
 
 function Card() {
   const [openModal, setOpenModal] = useState(false);
+  const [opacity, setOpacity] = useState(false);
+  const [started, setStarted] = useState(true);
+  const [finished, setFinished] = useState(false);
+
+  const validation = ()=>{
+
+  }
 
   const handleOpenModal = () => {
     setOpenModal(true);
     console.log(openModal);
   };
+
   return (
     <>
       {polls.map((poll, index) => {
