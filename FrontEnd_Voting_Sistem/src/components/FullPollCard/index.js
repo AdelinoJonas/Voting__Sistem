@@ -131,7 +131,7 @@ function FullPollCard({ openModal, setOpenModal }) {
                     onClick={handleCloseModal}
                   />
                   <div className="deleteBox">
-                    <button className="delete">EXCLUIR</button>
+                  <button className="put">EDITAR</button><button className="delete">EXCLUIR</button>
                   </div>
                   <div className="createdRegisterModal">
                     <h3> Criado em: </h3> <h2>{poll.registerDate}</h2>
