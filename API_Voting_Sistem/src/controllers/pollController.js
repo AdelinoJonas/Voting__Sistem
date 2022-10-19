@@ -1,5 +1,7 @@
+const {
+  query
+} = require('express');
 const pollService = require('../services/pollServices');
-const db = require('../db');
 
 module.exports = {
   getAll: async (req, res) => {
@@ -30,25 +32,30 @@ module.exports = {
     res.json(json);
   },
   postQuestion: async (req, res) => {
-    const { startDate, endDate, title, questionDescription } = req.body;
+    let startDate = req.body.startDate;
+    let endDate = req.body.endDate;
+    let title = req.body.title;
+    let questionDescription = req.body.questionDescription;
 
-    if (!nome) {
-        return res.status(400).json("O campo nome é obrigatório.");
+    console.log(startDate, endDate, title, questionDescription);
+
+    if (!startDate && !endDate && !title && !questionDescription) {
+      return res.status(400).json("Todos os campos são obrigatórios");
     }
 
     try {
-        const query = 'insert into autores (nome, idade) values ($1, $2)';
-        const autor = await conexao.query(query, [nome, idade]);
+      const query = pollService.query;
+      const poll = await pollService.postQuestion(query, [startDate, endDate, title, questionDescription]);
 
-        if (autor.rowCount === 0) {
-            return res.status(400).json('Não foi possivel cadastrar o autor');
-        }
+      if (poll.rowCount === 0) {
+        return res.status(400).json('Não foi possivel cadastrar a questão da enquete');
+      }
 
-        return res.status(200).json('Autor cadastrado com sucesso.')
+      return res.status(200).json('Questão cadastrada com sucesso!')
     } catch (error) {
-        return res.status(400).json(error.message);
+      return res.status(400).json(error.message);
     }
-},
+  },
   postOption: async (req, res) => {
     let json = {
       error: '',
@@ -103,7 +110,9 @@ module.exports = {
       result: {}
     };
     await pollService.deletePoll(req.params.id);
-    json.result = {result:"Enquete deleteda com sucesso!"};
+    json.result = {
+      result: "Enquete deleteda com sucesso!"
+    };
     res.json(json);
   }
 }
