@@ -1,7 +1,6 @@
 .container-home {
   background: linear-gradient(270deg, rgba(29, 253, 243, 1) 0%, rgba(92, 117, 173, 1) 82%);
   align-items: center;
-  padding-top: 80px;
   padding-bottom: 50px;
 }
 
@@ -17,4 +16,26 @@
 .cardPoll{
   display: flex;
   flex-wrap: wrap;
+}
+
+.headerHome{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerPoll{
+  all: unset;
+  margin: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 200px;
+  height: 70px;
+  background-color: olivedrab;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FFF;
+  margin: 20px 0 20px 0;
 }
