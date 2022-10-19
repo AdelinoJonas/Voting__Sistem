@@ -32,52 +32,50 @@ module.exports = {
     res.json(json);
   },
   postQuestion: async (req, res) => {
-    let startDate = req.body.startDate;
-    let endDate = req.body.endDate;
-    let title = req.body.title;
-    let questionDescription = req.body.questionDescription;
+    let poll = {
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      title: req.body.title,
+      questionDescription: req.body.questionDescription,
+      option1: req.body.option1,
+      option2: req.body.option2,
+      option3: req.body.option3
+    }
 
-    console.log(startDate, endDate, title, questionDescription);
-
-    if (!startDate && !endDate && !title && !questionDescription) {
+    if (!poll.startDate && !poll.endDate && !poll.title && !poll.questionDescription) {
       return res.status(400).json("Todos os campos são obrigatórios");
     }
 
     try {
-      const query = pollService.query;
-      const poll = await pollService.postQuestion(query, [startDate, endDate, title, questionDescription]);
+      await pollService.postQuestion(poll);
 
-      if (poll.rowCount === 0) {
-        return res.status(400).json('Não foi possivel cadastrar a questão da enquete');
-      }
-
-      return res.status(200).json('Questão cadastrada com sucesso!')
+      return res.status(200).json({
+        msg: 'Questão cadastrada com sucesso!'
+      })
     } catch (error) {
       return res.status(400).json(error.message);
     }
   },
-  postOption: async (req, res) => {
-    let json = {
-      error: '',
-      result: {}
-    };
-
-    let option1 = req.body.option1;
-    let option2 = req.body.option2;
-    let option3 = req.body.option3;
-
-    console.log(option1, option2, option3);
-    if (option1 && option2 && option3) {
-      await pollService.postOption(option1, option2, option3);
-      json.result = {
-        option1,
-        option2,
-        option3
-      };
-    } else {
-      json.error = 'Todos os campos são Obrigatórios!';
+  postVote: async (req, res) => {
+    let poll = {
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      title: req.body.title
     }
-    res.json(json);
+
+    if (!poll.startDate && !poll.endDate && !poll.title && !poll.questionDescription) {
+      return res.status(400).json("Todos os campos são obrigatórios");
+    }
+
+    try {
+      await pollService.postQuestion(poll);
+
+      return res.status(200).json({
+        msg: 'Questão cadastrada com sucesso!'
+      })
+    } catch (error) {
+      return res.status(400).json(error.message);
+    }
   },
   updatePoll: async (req, res) => {
     let json = {
