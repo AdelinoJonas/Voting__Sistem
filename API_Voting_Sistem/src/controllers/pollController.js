@@ -1,6 +1,3 @@
-const {
-  query
-} = require('express');
 const pollService = require('../services/pollServices');
 
 module.exports = {
@@ -31,7 +28,7 @@ module.exports = {
     }
     res.json(json);
   },
-  postQuestion: async (req, res) => {
+  postPoll: async (req, res) => {
     let poll = {
       startDate: req.body.startDate,
       endDate: req.body.endDate,
@@ -45,9 +42,8 @@ module.exports = {
     if (!poll.startDate && !poll.endDate && !poll.title && !poll.questionDescription) {
       return res.status(400).json("Todos os campos são obrigatórios");
     }
-
     try {
-      await pollService.postQuestion(poll);
+      await pollService.postPoll(poll);
 
       return res.status(200).json({
         msg: 'Questão cadastrada com sucesso!'
@@ -58,13 +54,15 @@ module.exports = {
   },
   postVote: async (req, res) => {
     let poll = {
-      startDate: req.body.startDate,
+      voteOption1: req.body.startDate,
       endDate: req.body.endDate,
       title: req.body.title
     }
 
     if (!poll.startDate && !poll.endDate && !poll.title && !poll.questionDescription) {
-      return res.status(400).json("Todos os campos são obrigatórios");
+      return res.status(400).json({
+        msg: "Todos os campos são obrigatórios"
+      });
     }
 
     try {
