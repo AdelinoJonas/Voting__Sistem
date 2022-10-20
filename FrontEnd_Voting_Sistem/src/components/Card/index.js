@@ -4,15 +4,10 @@ import FullPollCard from "../FullPollCard";
 
 function Card({dataPoll}) {
   const [openModal, setOpenModal] = useState(false);
-  // const [opacity, setOpacity] = useState(false);
-  // const [started, setStarted] = useState(true);
-  // const [finished, setFinished] = useState(false);
 
-  // const validation = () => {};
-
-  const handleOpenModal = () => {
-    setOpenModal(true);
-    console.log(openModal);
+  const handleOpenModalFull = () => {
+    setOpenModalFull(true);
+    console.log(openModalFull);
   };
 
   return (
@@ -57,7 +52,7 @@ function Card({dataPoll}) {
                 <h2> ({poll.options[2].totalVotes})</h2>
               </section>
             </div>
-            <button className="buttonOpen" onClick={handleOpenModal}>
+            <button className="buttonOpen" onClick={handleOpenModalFull}>
               ABRIR
             </button>
           </div>
