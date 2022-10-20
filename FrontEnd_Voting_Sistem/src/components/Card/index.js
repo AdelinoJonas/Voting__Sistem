@@ -1,119 +1,37 @@
 import "./style.css";
 import React, { useState } from "react";
 import FullPollCard from "../FullPollCard";
-// import { UserContext } from "../../contexts/userContext";
-// import Home from "../../pages/Home";
-
-const polls = [
-  {
-    id: "1",
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    option1: "SIM",
-    option2: "NÃO",
-    option3: "TALVEZ",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-  {
-    id: "2",
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "o Jonas vai ser contratado?",
-    title: "Positividade",
-    option1: "SIM",
-    option2: "NÃO",
-    option3: "TALVEZ",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-  {
-    id: "3",
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.?",
-    title: "Acertividade",
-    option1:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    option2:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    option3:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-  {
-    id: "4",
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.?",
-    title: "Acertividade",
-    option1:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, praesentium temporibus!",
-    option2:
-      "Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    option3:
-      "Harum, praesentium temporibus! Officia reiciendis non quisquam! Repudiandae animi nisi quo enim.",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-  {
-    id: "5",
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    option1: "SIM",
-    option2: "NÃO",
-    option3: "TALVEZ",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-];
-
-function Card() {
-  const [openModal, setOpenModal] = useState(false);
+// dataPoll={setDataPoll}
+//             setDataPoll={setDataPoll}
+//             setCurrentPoll={setCurrentPoll}
+//             currentPoll={currentPoll}
+//             reload={reload}
+//             setReload={setReload}
+//             handleOrderPoll={handleOrderPoll}
+//             handleLoadPolls={handleLoadPolls}
+function Card({
+  dataPoll,
+  setDataPoll,
+  currentPoll,
+  setCurrentPoll,
+  reload,
+  setReload,
+  handleOrderPoll,
+  handleLoadPolls,
+}) {
   const [opacity, setOpacity] = useState(false);
+  const [openModalFull, setOpenModalFull] = useState(false);
 
-  const currentDate = "2017-8-16";
-
-  const validation = () => {
-    if(currentDate < polls.startDate || currentDate > polls.startDate){
-      setOpacity(true);
-      console.log(opacity);
-    }
-  };
-
-  const handleDateChange =() =>{
-    validation();
-  }
-
-
-
-  const handleOpenModal = () => {
-    setOpenModal(true);
-    console.log(openModal);
+  const handleOpenModalFull = () => {
+    setOpenModalFull(true);
+    console.log(openModalFull);
   };
 
   return (
     <>
-      {polls.map((poll, index) => {
+      {dataPoll.map((poll, index) => {
         return (
-          <div className="cardContent" key={index} onChange={handleDateChange}>
+          <div className="cardContent" key={index}>
             <div className="container-title">
               <div className="titleRegister">
                 <div className="createdRegister">
@@ -150,14 +68,24 @@ function Card() {
                 <h2> ({poll.votesOption1})</h2>
               </section>
             </div>
-            <button className="buttonOpen" onClick={handleOpenModal}>
+            <button className="buttonOpen" onClick={handleOpenModalFull}>
               ABRIR
             </button>
           </div>
         );
       })}
-      {openModal && (
-        <FullPollCard setOpenModal={setOpenModal} openModal={openModal}/>
+      {openModalFull && (
+        <FullPollCard
+          setOpenModalFull={setOpenModalFull}
+          dataPoll={setDataPoll}
+          setDataPoll={setDataPoll}
+          setCurrentPoll={setCurrentPoll}
+          currentPoll={currentPoll}
+          reload={reload}
+          setReload={setReload}
+          handleOrderPoll={handleOrderPoll}
+          handleLoadPolls={handleLoadPolls}
+        />
       )}
     </>
   );
