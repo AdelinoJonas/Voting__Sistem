@@ -1,40 +1,90 @@
 import React, { useState } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
+import InputMask from "react-input-mask";
 
 function CardRegisterPoll({ openModal, setOpenModal }) {
-  const [startData, setStartData] = useState({
+  const [formRegisterPoll, setFormRegisterPoll] = useState({
     startDate: "",
     endDate: "",
     questionDescription: "",
     title: "",
-    option1: "",
-    option2: "",
-    option3: "",
+    options: [
+      {
+        optionDescription1: "",
+      },
+      {
+        optionDescription2: "",
+      },
+      {
+        optionDescription3: "",
+      },
+    ],
   });
 
-  const data = startData;
+  const dataPoll = formRegisterPoll;
 
-  const handleDataChange = (e) => {
-    setStartData(e.target.data);
+  const handleDataChange = (e, target) => {
+    setFormRegisterPoll({ ...formRegisterPoll });
+    console.log(formRegisterPoll.startDate);
   };
 
-  const handleSubmit = (e) => {
+  async function registerTransaction(body) {
+    return await fetch("http://localhost:80/api/poll", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  }
+
+  async function handleSubmit(e) {
+    const [day, month, year] = formRegisterPoll.date.split("/");
+
+    const selectedDate = new Date(`${month}/${day}/${year}`);
+    const body = {
+      // startDate: dataPoll.startDate,
+      startDate: selectedDate,
+      endDate: selectedDate,
+      questionDescription: dataPoll.value,
+      title: dataPoll.value,
+      options: [
+        {
+          optionDescription1: dataPoll.value,
+        },
+        {
+          optionDescription2: dataPoll.value,
+        },
+        {
+          optionDescription3: dataPoll.value,
+        },
+      ],
+    };
+
+    // if(currentPoll){
+    //     await updateCard(body);
+    //     setOpenModal(false);
+
+    //     return;
+    // }
+
+    await registerTransaction(body);
     if (
-      !data.startDate &&
-      !data.endDate &&
-      !data.questionDescription &&
-      !data.title &&
-      !data.option1 &&
-      !data.option2 &&
-      !data.option3
+      !dataPoll.startDate &&
+      !dataPoll.endDate &&
+      !dataPoll.questionDescription &&
+      !dataPoll.title &&
+      !dataPoll.option1 &&
+      !dataPoll.option2 &&
+      !dataPoll.option3
     ) {
       alert("Totos os campos são obrigatórios!");
     } else {
       alert("Enquete cadastrada com Sucesso!");
     }
     e.preventDefault();
-  };
+  }
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -67,24 +117,33 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
                     id="startDate"
                     className="spanDateRegister"
                     type="date"
-                    value={data.startDate}
+                    value={dataPoll.startDate}
                     required
                     placeholder="DD/MM/AAAA"
                     onChange={(e) => {
-                      handleDataChange(e);
+                      handleDataChange((e) => handleDataChange(e.target.value));
                     }}
                   />
+                  {/* <InputMask
+                    mask="99/99/9999"
+                    className="spanDateRegister"
+                    name="date"
+                    type="text"
+                    value={dataPoll.startDate}
+                    onChange={(e) => handleDataChange(e.target.value)}
+                  /> */}
                 </section>
                 <section>
                   <label>Data de Término: </label>
                   <input
+                    id="endDate"
                     className="spanDateRegister"
-                    type="date"
-                    value={data.endDate}
+                    type="text"
+                    value={dataPoll.endDate}
                     required
                     placeholder="DD/MM/AAAA"
                     onChange={(e) => {
-                      handleDataChange(e);
+                      handleDataChange(e.target);
                     }}
                   />
                 </section>
@@ -92,12 +151,13 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <div className="centerTitle">
                 <label>Título da enquete: </label>
                 <input
+                  id="title"
                   type="text"
-                  value={data.title}
+                  value={dataPoll.title}
                   required
                   placeholder="TÍTULO"
                   onChange={(e) => {
-                    handleDataChange(e);
+                    handleDataChange(e.target);
                   }}
                 />
               </div>
@@ -107,11 +167,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
             <label>Descreva a enquete:</label>
             <textarea
               type="text"
-              value={data.questionDescription}
+              value={dataPoll.questionDescription}
               required
               placeholder="Descrição da Enquete."
               onChange={(e) => {
-                handleDataChange(e);
+                handleDataChange(e.target);
               }}
             />
           </div>
@@ -121,11 +181,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <br />
               <input
                 type="text"
-                value={data.option1}
+                value={dataPoll.options[0]}
                 required
                 placeholder="Descrição opção 1"
                 onChange={(e) => {
-                  handleDataChange(e);
+                  handleDataChange(e.target);
                 }}
               />
             </section>
@@ -134,11 +194,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <br />
               <input
                 type="text"
-                value={data.option2}
+                value={dataPoll.options[1]}
                 required
                 placeholder="Descrição opção 2"
                 onChange={(e) => {
-                  handleDataChange(e);
+                  handleDataChange(e.target);
                 }}
               />
             </section>
@@ -147,11 +207,11 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
               <br />
               <input
                 type="text"
-                value={data.option3}
+                value={dataPoll.options[2]}
                 required
                 placeholder="Descrição opção 3"
                 onChange={(e) => {
-                  handleDataChange(e);
+                  handleDataChange(e.target);
                 }}
               />
             </section>
