@@ -6,7 +6,7 @@ import FullPollCard from "../FullPollCard";
 
 const polls = [
   {
-    id: 1,
+    id: "1",
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
@@ -20,7 +20,7 @@ const polls = [
     votesOption3: "4",
   },
   {
-    id: 2,
+    id: "2",
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
@@ -34,7 +34,7 @@ const polls = [
     votesOption3: "4",
   },
   {
-    id: 3,
+    id: "3",
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
@@ -52,7 +52,7 @@ const polls = [
     votesOption3: "4",
   },
   {
-    id: 4,
+    id: "4",
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
@@ -70,35 +70,7 @@ const polls = [
     votesOption3: "4",
   },
   {
-    id: 5,
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    option1: "SIM",
-    option2: "NÃO",
-    option3: "TALVEZ",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-  {
-    id: 6,
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    option1: "SIM",
-    option2: "NÃO",
-    option3: "TALVEZ",
-    votesOption1: "12",
-    votesOption2: "3",
-    votesOption3: "4",
-  },
-  {
-    id: 7,
+    id: "5",
     registerDate: "2017-8-16",
     startDate: "2017-8-16",
     endDate: "2017-8-16",
@@ -116,12 +88,21 @@ const polls = [
 function Card() {
   const [openModal, setOpenModal] = useState(false);
   const [opacity, setOpacity] = useState(false);
-  const [started, setStarted] = useState(true);
-  const [finished, setFinished] = useState(false);
 
-  const validation = ()=>{
+  const currentDate = "2017-8-16";
 
+  const validation = () => {
+    if(currentDate < polls.startDate || currentDate > polls.startDate){
+      setOpacity(true);
+      console.log(opacity);
+    }
+  };
+
+  const handleDateChange =() =>{
+    validation();
   }
+
+
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -132,7 +113,7 @@ function Card() {
     <>
       {polls.map((poll, index) => {
         return (
-          <div className="cardContent" key={index}>
+          <div className="cardContent" key={index} onChange={handleDateChange}>
             <div className="container-title">
               <div className="titleRegister">
                 <div className="createdRegister">
@@ -175,7 +156,9 @@ function Card() {
           </div>
         );
       })}
-      {openModal && <FullPollCard setOpenModal={setOpenModal} openModal={openModal}/>}
+      {openModal && (
+        <FullPollCard setOpenModal={setOpenModal} openModal={openModal}/>
+      )}
     </>
   );
 }
