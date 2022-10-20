@@ -3,33 +3,37 @@ import "./style.css";
 import closeIcon from "../../assets/close.svg";
 import InputMask from "react-input-mask";
 
-function CardRegisterPoll({ openModal, setOpenModal }) {
-  const [formRegisterPoll, setFormRegisterPoll] = useState({
+function CardRegisterPoll({
+  openModal,
+  setOpenModal,
+  setCurrentPoll,
+  currentPoll,
+}) {
+  const defaltValuesForm = {
+    registerDate: "",
     startDate: "",
     endDate: "",
     questionDescription: "",
     title: "",
     options: [
       {
-        optionDescription1: "",
+        optionDescription: "",
+        totalVotes: 0,
       },
       {
-        optionDescription2: "",
+        optionDescription: "",
+        totalVotes: 0,
       },
       {
-        optionDescription3: "",
+        optionDescription: "",
+        totalVotes: 0,
       },
     ],
-  });
-
-  const dataPoll = formRegisterPoll;
-
-  const handleDataChange = (e, target) => {
-    setFormRegisterPoll({ ...formRegisterPoll });
-    console.log(formRegisterPoll.startDate);
   };
 
-  async function registerTransaction(body) {
+  const [formData, setFormData] = useState(defaltValuesForm);
+
+  async function registerPoll(body) {
     return await fetch("http://localhost:80/api/poll", {
       method: "POST",
       headers: {
@@ -39,56 +43,57 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
     });
   }
 
+  const data = formData;
+
   async function handleSubmit(e) {
-    const [day, month, year] = formRegisterPoll.date.split("/");
-
-    const selectedDate = new Date(`${month}/${day}/${year}`);
-    const body = {
-      // startDate: dataPoll.startDate,
-      startDate: selectedDate,
-      endDate: selectedDate,
-      questionDescription: dataPoll.value,
-      title: dataPoll.value,
-      options: [
-        {
-          optionDescription1: dataPoll.value,
-        },
-        {
-          optionDescription2: dataPoll.value,
-        },
-        {
-          optionDescription3: dataPoll.value,
-        },
-      ],
-    };
-
-    // if(currentPoll){
-    //     await updateCard(body);
-    //     setOpenModal(false);
-
-    //     return;
-    // }
-
-    await registerTransaction(body);
     if (
-      !dataPoll.startDate &&
-      !dataPoll.endDate &&
-      !dataPoll.questionDescription &&
-      !dataPoll.title &&
-      !dataPoll.option1 &&
-      !dataPoll.option2 &&
-      !dataPoll.option3
+      !data.startDate &&
+      !data.endDate &&
+      !data.questionDescription &&
+      !data.title &&
+      !data.options.optionDescription &&
+      !data.options.totalVotes &&
+      !data.options.totalVotes
     ) {
       alert("Totos os campos são obrigatórios!");
     } else {
       alert("Enquete cadastrada com Sucesso!");
     }
+
+    const body = {
+      registerDate: e.target.value,
+      startDate: e.target.value,
+      endDate: e.target.value,
+      questionDescription: e.target.value,
+      title: e.target.value,
+      options: [
+        {
+          optionDescription: e.target.value,
+          totalVotes: e.target.value,
+        },
+        {
+          optionDescription: e.target.value,
+          totalVotes: e.target.value,
+        },
+        {
+          optionDescription: e.target.value,
+          totalVotes: e.target.value,
+        },
+      ],
+    };
+
     e.preventDefault();
+
+    await registerPoll(body);
+    setOpenModal(false);
   }
+
+  const handleDataChange = (e) => {
+    setFormData(e.target.value);
+  };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    console.log(openModal);
   };
 
   return (
@@ -120,18 +125,8 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
                     value={dataPoll.startDate}
                     required
                     placeholder="DD/MM/AAAA"
-                    onChange={(e) => {
-                      handleDataChange((e) => handleDataChange(e.target.value));
-                    }}
+                    onChange={(e) => handleDataChange(e)}
                   />
-                  {/* <InputMask
-                    mask="99/99/9999"
-                    className="spanDateRegister"
-                    name="date"
-                    type="text"
-                    value={dataPoll.startDate}
-                    onChange={(e) => handleDataChange(e.target.value)}
-                  /> */}
                 </section>
                 <section>
                   <label>Data de Término: </label>

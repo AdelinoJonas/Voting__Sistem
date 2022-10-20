@@ -1,26 +1,9 @@
 import "./style.css";
 import React, { useState } from "react";
 import FullPollCard from "../FullPollCard";
-// dataPoll={setDataPoll}
-//             setDataPoll={setDataPoll}
-//             setCurrentPoll={setCurrentPoll}
-//             currentPoll={currentPoll}
-//             reload={reload}
-//             setReload={setReload}
-//             handleOrderPoll={handleOrderPoll}
-//             handleLoadPolls={handleLoadPolls}
-function Card({
-  dataPoll,
-  setDataPoll,
-  currentPoll,
-  setCurrentPoll,
-  reload,
-  setReload,
-  handleOrderPoll,
-  handleLoadPolls,
-}) {
-  const [opacity, setOpacity] = useState(false);
-  const [openModalFull, setOpenModalFull] = useState(false);
+
+function Card({dataPoll}) {
+  const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModalFull = () => {
     setOpenModalFull(true);
@@ -54,18 +37,19 @@ function Card({
             <div className="showdescription">
               <h2 className="textDescription">{poll.questionDescription}</h2>
             </div>
+
             <div className="optionsContainer">
               <section>
-                <h1>{poll.option1}</h1>
-                <h2> ({poll.votesOption1})</h2>
+                <h1>{poll.options[0].optionDescription}</h1>
+                <h2> ({poll.options[0].totalVotes})</h2>
               </section>
               <section>
-                <h1>{poll.option2}</h1>
-                <h2> ({poll.votesOption1})</h2>
+                <h1>{poll.options[1].optionDescription}</h1>
+                <h2> ({poll.options[1].totalVotes})</h2>
               </section>
               <section>
-                <h1>{poll.option3}</h1>
-                <h2> ({poll.votesOption1})</h2>
+                <h1>{poll.options[2].optionDescription}</h1>
+                <h2> ({poll.options[2].totalVotes})</h2>
               </section>
             </div>
             <button className="buttonOpen" onClick={handleOpenModalFull}>
@@ -74,18 +58,8 @@ function Card({
           </div>
         );
       })}
-      {openModalFull && (
-        <FullPollCard
-          setOpenModalFull={setOpenModalFull}
-          dataPoll={setDataPoll}
-          setDataPoll={setDataPoll}
-          setCurrentPoll={setCurrentPoll}
-          currentPoll={currentPoll}
-          reload={reload}
-          setReload={setReload}
-          handleOrderPoll={handleOrderPoll}
-          handleLoadPolls={handleLoadPolls}
-        />
+      {openModal && (
+        <FullPollCard setOpenModal={setOpenModal} openModal={openModal} />
       )}
     </>
   );
