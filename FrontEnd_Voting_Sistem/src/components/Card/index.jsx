@@ -1,5 +1,5 @@
-import "./style.css";
 import React, { useState } from "react";
+import "./style.css";
 import FullPollCard from "../FullPollCard";
 
 function Card({ dataPoll }) {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
+import InputMask from "react-input-mask";
 
 function CardRegisterPoll({ setOpenModal, setCurrentPoll, currentPoll }) {
   const defaltValuesForm = {
@@ -125,8 +126,9 @@ function CardRegisterPoll({ setOpenModal, setCurrentPoll, currentPoll }) {
                 <section>
                   <label>Data de Término: </label>
                   <input
+                    id="endDate"
                     className="spanDateRegister"
-                    type="date"
+                    type="text"
                     value={data.endDate}
                     required
                     placeholder="DD/MM/AAAA"
@@ -139,6 +141,7 @@ function CardRegisterPoll({ setOpenModal, setCurrentPoll, currentPoll }) {
               <div className="centerTitle">
                 <label>Título da enquete: </label>
                 <input
+                  id="title"
                   type="text"
                   value={data.title}
                   required
@@ -168,7 +171,7 @@ function CardRegisterPoll({ setOpenModal, setCurrentPoll, currentPoll }) {
               <br />
               <input
                 type="text"
-                value={data.option1}
+                value={data.options[0]}
                 required
                 placeholder="Descrição opção 1"
                 onChange={(e) => {
@@ -181,7 +184,7 @@ function CardRegisterPoll({ setOpenModal, setCurrentPoll, currentPoll }) {
               <br />
               <input
                 type="text"
-                value={data.option2}
+                value={data.options[1]}
                 required
                 placeholder="Descrição opção 2"
                 onChange={(e) => {
@@ -194,7 +197,7 @@ function CardRegisterPoll({ setOpenModal, setCurrentPoll, currentPoll }) {
               <br />
               <input
                 type="text"
-                value={data.option3}
+                value={data.options[2]}
                 required
                 placeholder="Descrição opção 3"
                 onChange={(e) => {
