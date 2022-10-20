@@ -42,7 +42,7 @@ module.exports = {
     }
     try {
       await pollService.postPoll(poll);
-      
+
       return res.status(200).json({
         msg: 'Questão cadastrada com sucesso!'
       })
@@ -84,7 +84,6 @@ module.exports = {
     let title = req.body.title;
     let questionDescription = req.body.questionDescription;
 
-    console.log(startDate, endDate, title, questionDescription);
     if (id, startDate && endDate && title && questionDescription) {
       await pollService.updatePoll(startDate, endDate, title, questionDescription);
       json.result = {
