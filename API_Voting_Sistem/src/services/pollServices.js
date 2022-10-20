@@ -15,7 +15,6 @@ module.exports = {
       });
     });
   },
-
   getPoll: (id) => {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT id, registerDate, startDate, endDate, title, questionDescription, option1, option2, option3, votesOption1, votesOption2,votesOption3 FROM poll_options as o left outer JOIN options_votes as v ON o.idOption = v.idVotes left JOIN  poll_questions as q ON o.idOption = q.id WHERE id = ? GROUP BY id';
@@ -33,48 +32,48 @@ module.exports = {
       });
     });
   },
-  postQuestion: (startDate, endDate, title, questionDescription) => {
+  postPoll: (poll) => {
     return new Promise((resolve, reject) => {
-
-      const sql = 'INSERT INTO poll_questions (startDate, endDate, title, questionDescription) VALUES(?,?,?,?)';
-
-      db.query(sql, [startDate, endDate, title, questionDescription], (error, results) => {
-        if (error) {
-          reject(error);
-          return;
+      const sql =
+        "insert into poll_questions (startDate, endDate, title, questionDescription) values (?,?,?,?)";
+      db.query(
+        sql,
+        [poll.startDate, poll.endDate, poll.title, poll.questionDescription],
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+          const insertedId = results.insertId;
+          const sql =
+            "insert into poll_options (option1, option2, option3, questionId) values (?,?,?,?)";
+          db.query(
+            sql,
+            [poll.option1, poll.option2, poll.option3, insertedId],
+            (error, results) => {
+              if (error) {
+                reject(error);
+                return;
+              }
+              resolve(results);
+              console.log(insertedId);
+            }
+          );
         }
-        resolve(results.postQuestionid);
-        console.log(results);
-      })
-    });
-  },
-  postOption: (option1, option2, option3) => {
-    return new Promise((resolve, reject) => {
-
-      const sql = 'INSERT INTO poll_options (option1, option2, option3) VALUES (?,?,?)';
-
-      db.query(sql, [option1, option2, option3], (error, results, fields) => {
-        if (error) {
-          reject(error);
-          return;
-        }
-        resolve(results.insertId);
-        console.log(sql);
-      })
+      );
     });
   },
   updatePoll: (startDate, endDate, title, questionDescription) => {
     return new Promise((resolve, reject) => {
 
-      const sql = 'UPDATE startDate, endDate, title, questionDescription, option1, option2, option3, votesOption1, votesOption2,votesOption3 FROM poll_options as o left outer JOIN options_votes as v ON o.idOption = v.idVotes left JOIN  poll_questions as q ON o.idOption = q.id WHERE id = ?';
+      const sql = 'UPDATE poll_options SET votesOption1 = votesOptions + 1 where poll_options.id = 1';
 
-      db.query(sql, [startDate, endDate, title, questionDescription], (error, results) => {
+      db.query(sql, [votesOption1, endDate, title, questionDescription], (error, results) => {
         if (error) {
           reject(error);
           return;
         }
         resolve(results);
-        console.log(sql);
       })
     });
   },
