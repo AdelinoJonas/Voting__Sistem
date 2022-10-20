@@ -2,35 +2,7 @@ import "./style.css";
 import React, { useState } from "react";
 import FullPollCard from "../FullPollCard";
 
-const polls = [
-  {
-    id: 1,
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    options: [
-      {
-        idOption: 1,
-        optionDescription: "Alternativa A",
-        totalVotes: 0,
-      },
-      {
-        idOption: 2,
-        optionDescription: "Alternativa B",
-        totalVotes: 0,
-      },
-      {
-        idOption: 3,
-        optionDescription: "Alternativa C",
-        totalVotes: 0,
-      },
-    ],
-  },
-];
-
-function Card() {
+function Card({dataPoll}) {
   const [openModal, setOpenModal] = useState(false);
   // const [opacity, setOpacity] = useState(false);
   // const [started, setStarted] = useState(true);
@@ -45,7 +17,7 @@ function Card() {
 
   return (
     <>
-      {polls.map((poll, index) => {
+      {dataPoll.map((poll, index) => {
         return (
           <div className="cardContent" key={index}>
             <div className="container-title">

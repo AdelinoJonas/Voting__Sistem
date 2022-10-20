@@ -2,43 +2,97 @@ import React, { useState } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
 
-function CardRegisterPoll({ openModal, setOpenModal }) {
-  const [startData, setStartData] = useState({
+function CardRegisterPoll({
+  openModal,
+  setOpenModal,
+  setCurrentPoll,
+  currentPoll,
+}) {
+  const defaltValuesForm = {
+    registerDate: "",
     startDate: "",
     endDate: "",
     questionDescription: "",
     title: "",
-    option1: "",
-    option2: "",
-    option3: "",
-  });
-
-  const data = startData;
-
-  const handleDataChange = (e) => {
-    setStartData(e.target.data);
+    options: [
+      {
+        optionDescription: "",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "",
+        totalVotes: 0,
+      },
+    ],
   };
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState(defaltValuesForm);
+
+  async function registerPoll(body) {
+    return await fetch("http://localhost:80/api/poll", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  }
+
+  const data = formData;
+
+  async function handleSubmit(e) {
     if (
       !data.startDate &&
       !data.endDate &&
       !data.questionDescription &&
       !data.title &&
-      !data.option1 &&
-      !data.option2 &&
-      !data.option3
+      !data.options.optionDescription &&
+      !data.options.totalVotes &&
+      !data.options.totalVotes
     ) {
       alert("Totos os campos são obrigatórios!");
     } else {
       alert("Enquete cadastrada com Sucesso!");
     }
+
+    const body = {
+      registerDate: e.target.value,
+      startDate: e.target.value,
+      endDate: e.target.value,
+      questionDescription: e.target.value,
+      title: e.target.value,
+      options: [
+        {
+          optionDescription: e.target.value,
+          totalVotes: e.target.value,
+        },
+        {
+          optionDescription: e.target.value,
+          totalVotes: e.target.value,
+        },
+        {
+          optionDescription: e.target.value,
+          totalVotes: e.target.value,
+        },
+      ],
+    };
+
     e.preventDefault();
+
+    await registerPoll(body);
+    setOpenModal(false);
+  }
+
+  const handleDataChange = (e) => {
+    setFormData(e.target.value);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    console.log(openModal);
   };
 
   return (
@@ -70,9 +124,7 @@ function CardRegisterPoll({ openModal, setOpenModal }) {
                     value={data.startDate}
                     required
                     placeholder="DD/MM/AAAA"
-                    onChange={(e) => {
-                      handleDataChange(e);
-                    }}
+                    onChange={(e) => handleDataChange(e)}
                   />
                 </section>
                 <section>

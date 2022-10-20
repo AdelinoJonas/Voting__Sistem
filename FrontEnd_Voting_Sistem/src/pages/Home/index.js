@@ -4,9 +4,87 @@ import Card from "../../components/Card";
 import CardRegisterPoll from "../../components/CardRegisterPoll";
 import "./style.css";
 
+const polls = [
+  {
+    id: 1,
+    registerDate: "2017-8-16",
+    startDate: "2017-8-16",
+    endDate: "2017-8-16",
+    questionDescription: "O projeto está ficando bom?",
+    title: "Acertividade",
+    options: [
+      {
+        idOption: 1,
+        optionDescription: "Alternativa A",
+        totalVotes: 0,
+      },
+      {
+        idOption: 2,
+        optionDescription: "Alternativa B",
+        totalVotes: 0,
+      },
+      {
+        idOption: 3,
+        optionDescription: "Alternativa C",
+        totalVotes: 0,
+      },
+    ],
+  },
+  {
+    id: 2,
+    registerDate: "2017-8-16",
+    startDate: "2017-8-16",
+    endDate: "2017-8-16",
+    questionDescription: "O projeto está ficando bom?",
+    title: "Acertividade",
+    options: [
+      {
+        idOption: 1,
+        optionDescription: "Alternativa A",
+        totalVotes: 0,
+      },
+      {
+        idOption: 2,
+        optionDescription: "Alternativa B",
+        totalVotes: 0,
+      },
+      {
+        idOption: 3,
+        optionDescription: "Alternativa C",
+        totalVotes: 0,
+      },
+    ],
+  },
+  {
+    id: 3,
+    registerDate: "2017-8-16",
+    startDate: "2017-8-16",
+    endDate: "2017-8-16",
+    questionDescription: "O projeto está ficando bom?",
+    title: "Acertividade",
+    options: [
+      {
+        idOption: 1,
+        optionDescription: "Alternativa A",
+        totalVotes: 0,
+      },
+      {
+        idOption: 2,
+        optionDescription: "Alternativa B",
+        totalVotes: 0,
+      },
+      {
+        idOption: 3,
+        optionDescription: "Alternativa C",
+        totalVotes: 0,
+      },
+    ],
+  },
+];
+
 function Home() {
   const [openModal, setOpenModal] = useState(false);
-  const [dataPoll, setDataPoll] = useState([]);
+  const [dataPoll, setDataPoll] = useState(polls);
   const [currentPoll, setCurrentPoll] = useState(false);
   const [reload, setReload] = useState(false);
 
@@ -60,6 +138,8 @@ function Home() {
         <CardRegisterPoll
           setOpenModal={setOpenModal}
           openModal={setOpenModal}
+          currentPoll = {currentPoll}
+          setCurrentPoll = {setCurrentPoll}
         />
       )}
       <section className="section-polls">
@@ -67,6 +147,7 @@ function Home() {
           <Card
             openModal={openModal}
             setOpenModal={setOpenModal}
+            dataPoll = {dataPoll}
           />
         </div>
       </section>
