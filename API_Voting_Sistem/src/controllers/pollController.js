@@ -10,7 +10,7 @@ module.exports = {
     let polls = await pollService.getAll();
 
     if (polls) {
-      json.result.push(polls);
+      json.result.polls;
     }
     res.json(json);
   },
@@ -34,9 +34,7 @@ module.exports = {
       endDate: req.body.endDate,
       title: req.body.title,
       questionDescription: req.body.questionDescription,
-      option1: req.body.option1,
-      option2: req.body.option2,
-      option3: req.body.option3
+      options: req.body.options
     }
 
     if (!poll.startDate && !poll.endDate && !poll.title && !poll.questionDescription) {
@@ -44,7 +42,7 @@ module.exports = {
     }
     try {
       await pollService.postPoll(poll);
-
+      
       return res.status(200).json({
         msg: 'Questão cadastrada com sucesso!'
       })
@@ -69,7 +67,7 @@ module.exports = {
       await pollService.postQuestion(poll);
 
       return res.status(200).json({
-        msg: 'Questão cadastrada com sucesso!'
+        msg: 'Opção cadastrada com sucesso!'
       })
     } catch (error) {
       return res.status(400).json(error.message);
