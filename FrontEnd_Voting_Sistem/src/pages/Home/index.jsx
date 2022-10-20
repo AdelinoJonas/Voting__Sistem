@@ -88,8 +88,6 @@ function Home() {
   const [currentPoll, setCurrentPoll] = useState(false);
   const [reload, setReload] = useState(false);
 
-  console.log(dataPoll);
-
   useEffect(() => {
     handleLoadPolls();
   }, [reload]);
@@ -138,8 +136,8 @@ function Home() {
         <CardRegisterPoll
           setOpenModal={setOpenModal}
           openModal={setOpenModal}
-          currentPoll = {currentPoll}
-          setCurrentPoll = {setCurrentPoll}
+          currentPoll={currentPoll}
+          setCurrentPoll={setCurrentPoll}
         />
       )}
       <section className="section-polls">
@@ -147,7 +145,7 @@ function Home() {
           <Card
             openModal={openModal}
             setOpenModal={setOpenModal}
-            dataPoll = {dataPoll}
+            dataPoll={dataPoll}
           />
         </div>
       </section>

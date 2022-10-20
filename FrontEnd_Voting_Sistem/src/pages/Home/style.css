@@ -13,18 +13,18 @@
   flex-wrap: wrap;
 }
 
-.cardPoll{
+.cardPoll {
   display: flex;
   flex-wrap: wrap;
 }
 
-.headerHome{
+.headerHome {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.registerPoll{
+.registerPoll {
   all: unset;
   margin: 0;
   box-sizing: border-box;

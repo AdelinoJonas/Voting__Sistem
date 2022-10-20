@@ -11,7 +11,6 @@ module.exports = {
           return;
         }
         resolve(results);
-        console.log(results);
       });
     });
   },
@@ -64,7 +63,6 @@ module.exports = {
                 reject(error);
                 return;
               }
-
               resolve(results);
             });
           });
@@ -74,7 +72,7 @@ module.exports = {
   },
   updatePoll: (startDate, endDate, title, questionDescription) => {
     return new Promise((resolve, reject) => {
-      const sql =  "UPDATE poll_options SET votesOption1 = votesOptions + 1 where poll_options.id = 1";
+      const sql = "UPDATE poll_options SET votesOption1 = votesOptions + 1 where poll_options.id = 1";
 
       db.query(sql,
         [startDate, endDate, title, questionDescription],
@@ -98,7 +96,6 @@ module.exports = {
           return;
         }
         resolve(results);
-        console.log(results);
       });
     });
   },
