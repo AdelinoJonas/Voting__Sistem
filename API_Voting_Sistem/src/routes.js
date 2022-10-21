@@ -6,8 +6,9 @@ const pollController = require('./controllers/pollController');
 router.get('/polls', pollController.getAll);
 router.get('/poll/:id', pollController.getPoll);
 router.post('/poll', pollController.postPoll);
-// router.put('/option/:optionId', pollController.postOption);
-router.put('/updatePoll/:id', pollController.updatePoll);
+router.put('/poll/:Id', pollController.updatePoll);
+router.put('/option/:optionId', pollController.updateOption);
+router.put('/option/:optionId', pollController.updateVote);
 router.delete('/poll/:id', pollController.deletePoll);
 
 
