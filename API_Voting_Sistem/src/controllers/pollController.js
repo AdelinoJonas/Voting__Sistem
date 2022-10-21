@@ -4,13 +4,13 @@ module.exports = {
   getAll: async (req, res) => {
     let json = {
       error: '',
-      result: []
+      result: {}
     };
 
     let polls = await pollService.getAll();
 
     if (polls) {
-      json.result.polls;
+      json.result = polls;
     }
     res.json(json);
   },
@@ -42,7 +42,7 @@ module.exports = {
     }
     try {
       await pollService.postPoll(poll);
-      
+
       return res.status(200).json({
         msg: 'Questão cadastrada com sucesso!'
       })
@@ -50,25 +50,38 @@ module.exports = {
       return res.status(400).json(error.message);
     }
   },
-  postVote: async (req, res) => {
-    let poll = {
-      voteOption1: req.body.startDate,
-      endDate: req.body.endDate,
-      title: req.body.title
+  updateVote: async (req, res) => {
+    let votes = {
+      totalVotes: req.body.totalVotes
     }
-
-    if (!poll.startDate && !poll.endDate && !poll.title && !poll.questionDescription) {
-      return res.status(400).json({
-        msg: "Todos os campos são obrigatórios"
-      });
-    }
-
     try {
-      await pollService.postQuestion(poll);
+      await pollService.updateVote(votes);
 
       return res.status(200).json({
-        msg: 'Opção cadastrada com sucesso!'
+        msg: 'voto atualizado com sucesso!'
       })
+    } catch (error) {
+      return res.status(400).json(error.message);
+    }
+  },
+  updateOption: async (req, res) => {
+    let options = {
+      optionDescription: req.body.optionDescription,
+      question_id: req.body.question_id
+    }
+    try {
+      if (options.question_id && options.optionDescription) {
+        if(options.length >= 3){
+          await pollService.updateOption(options);
+          json.result = {
+            question_id,
+            optionDescription
+          };
+          return res.status(200).json({
+            msg: 'voto atualizado com sucesso!'
+          })
+        }
+      }
     } catch (error) {
       return res.status(400).json(error.message);
     }
@@ -78,15 +91,15 @@ module.exports = {
       error: '',
       result: {}
     };
+    const dataPollToUpdate = {
+    startDate : req.body.startDate,
+    endDate : req.body.endDate,
+    title : req.body.title,
+    questionDescription : req.body.questionDescription
+    }
 
-    let startDate = req.body.startDate;
-    let endDate = req.body.endDate;
-    let title = req.body.title;
-    let questionDescription = req.body.questionDescription;
-
-    console.log(startDate, endDate, title, questionDescription);
-    if (id, startDate && endDate && title && questionDescription) {
-      await pollService.updatePoll(startDate, endDate, title, questionDescription);
+    if (dataPollToUpdate.id, dataPollToUpdate.startDate && dataPollToUpdate.endDate && dataPollToUpdate.title && dataPollToUpdate.questionDescription) {
+      await pollService.updatePoll(dataPollToUpdate);
       json.result = {
         startDate,
         endDate,
