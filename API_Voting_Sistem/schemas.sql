@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS poll_questions (
 );
 
 CREATE TABLE IF NOT EXISTS poll_options(
-  idOption int PRIMARY KEY AUTO_INCREMENT,
+  id int PRIMARY KEY AUTO_INCREMENT,
   optionDescription varchar(150) NOT NULL,
   totalVotes integer NOT NULL DEFAULT 0,
   question_id INT NOT NULL,

@@ -51,40 +51,41 @@ module.exports = {
     }
   },
   updateVote: async (req, res) => {
-    let votes = {
-      totalVotes: req.body.totalVotes
+    let json = {
+      error: '',
+      result: {}
+    };
+    const dataVotesToUpdate = {
+      id: req.params.id
     }
     try {
-      await pollService.updateVote(votes);
-
-      return res.status(200).json({
-        msg: 'voto atualizado com sucesso!'
-      })
+      await pollService.updateVote(dataVotesToUpdate);
+      json.message = 'Atualizado com sucesso!';
     } catch (error) {
-      return res.status(400).json(error.message);
+      json.error = `Não foi possível atualizar voto, a mensagem de erro foi: ${error.message}`
     }
+    res.json(json);
   },
   updateOption: async (req, res) => {
-    let options = {
-      optionDescription: req.body.optionDescription,
-      question_id: req.body.question_id
+    let json = {
+      error: '',
+      result: {}
+    };
+    const dataOptionToUpdate = {
+      id: req.params.id,
+      optionDescription: req.body.optionDescription
     }
-    try {
-      if (options.question_id && options.optionDescription) {
-        if(options.length >= 3){
-          await pollService.updateOption(options);
-          json.result = {
-            question_id,
-            optionDescription
-          };
-          return res.status(200).json({
-            msg: 'voto atualizado com sucesso!'
-          })
-        }
+    if (dataOptionToUpdate.optionDescription) {
+      try {
+        await pollService.updateOption(dataOptionToUpdate);
+        json.message = 'Atualizado com sucesso!';
+      } catch (error) {
+        json.error = `Não foi possível atualizar opção, a mensagem de erro foi: ${error.message}`
       }
-    } catch (error) {
-      return res.status(400).json(error.message);
+    } else {
+      json.error = 'Todos os campos são Obrigatórios!';
     }
+    res.json(json);
   },
   updatePoll: async (req, res) => {
     let json = {
@@ -92,20 +93,19 @@ module.exports = {
       result: {}
     };
     const dataPollToUpdate = {
-    startDate : req.body.startDate,
-    endDate : req.body.endDate,
-    title : req.body.title,
-    questionDescription : req.body.questionDescription
+      id: req.params.id,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      title: req.body.title,
+      questionDescription: req.body.questionDescription
     }
-
-    if (dataPollToUpdate.id, dataPollToUpdate.startDate && dataPollToUpdate.endDate && dataPollToUpdate.title && dataPollToUpdate.questionDescription) {
-      await pollService.updatePoll(dataPollToUpdate);
-      json.result = {
-        startDate,
-        endDate,
-        title,
-        questionDescription
-      };
+    if (dataPollToUpdate.startDate && dataPollToUpdate.endDate && dataPollToUpdate.title && dataPollToUpdate.questionDescription) {
+      try {
+        await pollService.updatePoll(dataPollToUpdate);
+        json.message = 'Atualizado com sucesso!';
+      } catch (error) {
+        json.error = `Não foi possível atualizar enquete, a mensagem de erro foi: ${error.message}`
+      }
     } else {
       json.error = 'Todos os campos são Obrigatórios!';
     }
