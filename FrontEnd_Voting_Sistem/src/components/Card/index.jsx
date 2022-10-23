@@ -1,16 +1,18 @@
-import React, { useState } from "react";
 import "./style.css";
+import React, { useState, useEffect } from "react";
 import FullPollCard from "../FullPollCard";
 
-function Card({ dataPoll }) {
+function Card({pollsList}) {
   const [openModal, setOpenModal] = useState(false);
+
   const handleOpenModal = () => {
     setOpenModal(true);
+    console.log(openModal);
   };
 
   return (
     <>
-      {dataPoll.map((poll, index) => {
+      {pollsList.map((poll, index) => {
         return (
           <div className="cardContent" key={index}>
             <div className="container-title">
@@ -34,21 +36,6 @@ function Card({ dataPoll }) {
             </div>
             <div className="showdescription">
               <h2 className="textDescription">{poll.questionDescription}</h2>
-            </div>
-
-            <div className="optionsContainer">
-              <section>
-                <h1>{poll.options[0].optionDescription}</h1>
-                <h2> ({poll.options[0].totalVotes})</h2>
-              </section>
-              <section>
-                <h1>{poll.options[1].optionDescription}</h1>
-                <h2> ({poll.options[1].totalVotes})</h2>
-              </section>
-              <section>
-                <h1>{poll.options[2].optionDescription}</h1>
-                <h2> ({poll.options[2].totalVotes})</h2>
-              </section>
             </div>
             <button className="buttonOpen" onClick={handleOpenModal}>
               ABRIR
