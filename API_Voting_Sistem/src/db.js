@@ -7,8 +7,9 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME
 });
 
-connection.connect((error) => {
-  if (error) throw error;
+connection.connect((error)=>{
+    if(error) throw error;
+    process.env.DB_NAME;
 })
 
 module.exports = connection;

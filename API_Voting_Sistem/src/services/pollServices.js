@@ -32,8 +32,7 @@ module.exports = {
 
         db.query(sqlForOptions, poll.id, (error, options) => {
           if (error) {
-            reject(error);
-            return;
+            throw error;
           }
           poll.options = options
           resolve(poll)
@@ -70,50 +69,63 @@ module.exports = {
       );
     });
   },
-  updatePoll: (registerDate, startDate, endDate, title, questionDescription) => {
-    const sql = "UPDATE poll_questions SET optionDescription = ? where poll_questions.id = ?";
-    // const sql = "UPDATE poll_questions (startDate, endDate, title, questionDescription) values (?,?,?,?) where poll_questions.id = ?";
-    db.query(sql,
-      [registerDate, startDate, endDate, title, questionDescription],
-      (error, results) => {
-        if (error) {
-          reject(error);
-          return;
-        }
-        resolve(results);
-      });
-  },
-  updateOption: (optionDescription, question_id) => {
-    const sql = "UPDATE poll_options SET optionDescription = ? where poll_options.question_id = ?";
-
-    db.query(sql,
-      [optionDescription, question_id],
-      (error, results) => {
-        if (error) {
-          reject(error);
-          return;
-        }
-        resolve(results);
-      });
-  },
-  updateVote: (id, totalVote) => {
+  updatePoll: async ({
+    id,
+    startDate,
+    endDate,
+    title,
+    questionDescription
+  }) => {
     return new Promise((resolve, reject) => {
 
-      const sql = "UPDATE poll_options SET totalVotes = ? where poll_options.id = ?";
-
-      //const sql = "UPDATE poll_options SET votesOption1 = votesOptions + 1 where poll_options.id = 1";
-
-
+      const sql = "UPDATE poll_questions SET startDate = ?, endDate = ?, questionDescription = ?, title = ? where id = ?";
       db.query(sql,
-        [id, totalVote],
+        [startDate, endDate, title, questionDescription, id],
         (error, results) => {
           if (error) {
-            reject(error);
-            return;
+            reject(error)
           }
-          resolve(results);
+
+          resolve(results)
         });
-    });
+    })
+  },
+  updateOption: async ({
+    id,
+    optionDescription
+  }) => {
+    return new Promise((resolve, reject) => {
+
+      const sql = "UPDATE poll_options SET optionDescription = ? where id = ?";
+      db.query(sql,
+        [optionDescription, id],
+        (error, results) => {
+
+          if (error) {
+            reject(error)
+          }
+
+          resolve(results)
+        });
+    })
+  },
+  updateVote: async ({
+    id,
+    totalVotes
+  }) => {
+    return new Promise((resolve, reject) => {
+      const sql = "UPDATE poll_options SET totalVotes = totalVotes + 1 where id = ?";
+      db.query(sql,
+        [id],
+        (error, results) => {
+
+          if (error) {
+            reject(error)
+          }
+
+          resolve(results)
+        });
+    })
   },
   deletePoll: (id) => {
     return new Promise((resolve, reject) => {
