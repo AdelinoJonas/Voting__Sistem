@@ -1,23 +1,115 @@
 import "./style.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullPollCard from "../FullPollCard";
 
-function Card({dataPoll}) {
-  const [openModal, setOpenModal] = useState(false);
-  // const [opacity, setOpacity] = useState(false);
-  // const [started, setStarted] = useState(true);
-  // const [finished, setFinished] = useState(false);
+const polls = [
+  {
+    id: 1,
+    registerDate: "2017-8-16",
+    startDate: "2017-8-16",
+    endDate: "2017-8-16",
+    questionDescription: "O projeto está ficando bom?",
+    title: "Acertividade",
+    options: [
+      {
+        optionDescription: "Alternativa A",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "Alternativa B",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "Alternativa C",
+        totalVotes: 0,
+      },
+    ],
+  },
+  {
+    id: 2,
+    registerDate: "2017-8-16",
+    startDate: "2017-8-16",
+    endDate: "2017-8-16",
+    questionDescription: "jafijdfodjso?",
+    title: "Acertividade",
+    options: [
+      {
+        optionDescription: "Alternativa A",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "Alternativa B",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "Alternativa C",
+        totalVotes: 0,
+      },
+    ],
+  },
+  {
+    id: 3,
+    registerDate: "2017-8-16",
+    startDate: "2017-8-16",
+    endDate: "2017-8-16",
+    questionDescription: "lorem ipsum ?",
+    title: "Acertividade",
+    options: [
+      {
+        optionDescription: "Alternativa A",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "Alternativa B",
+        totalVotes: 0,
+      },
+      {
+        optionDescription: "Alternativa C",
+        totalVotes: 0,
+      },
+    ],
+  },
+];
 
-  // const validation = () => {};
+function Card({pollsList}) {
+  const [openModal, setOpenModal] = useState(false);
+  // const [dataGet, setDataGet] = useState();
+
+  // console.log(pollsList);
+  // console.log(pollsList);
+  // useEffect(() => {
+  //     handleGetPolls();
+  // }, []);
+
+  // async function handleGetPolls() {
+  //   const response = await fetch("http://localhost:80/api/polls", {
+  //     method: "GET",
+  //   });
+
+  //   const data = await response.json();
+  //   console.log({dataGet:data});
+
+  //   setDataGet({...data});
+  // }
 
   const handleOpenModal = () => {
     setOpenModal(true);
     console.log(openModal);
   };
 
+  // async function handleGetPolls() {
+  //   const response = await fetch("http://localhost:80/api/polls", {
+  //     method: "GET",
+  //   });
+
+  //   const data = await response.json();
+  //   setPollsList(data);
+  // }
+
+  console.log(pollsList);
   return (
     <>
-      {dataPoll.map((poll, index) => {
+      {pollsList.map((poll, index) => {
         return (
           <div className="cardContent" key={index}>
             <div className="container-title">
@@ -41,21 +133,6 @@ function Card({dataPoll}) {
             </div>
             <div className="showdescription">
               <h2 className="textDescription">{poll.questionDescription}</h2>
-            </div>
-
-            <div className="optionsContainer">
-              <section>
-                <h1>{poll.options[0].optionDescription}</h1>
-                <h2> ({poll.options[0].totalVotes})</h2>
-              </section>
-              <section>
-                <h1>{poll.options[1].optionDescription}</h1>
-                <h2> ({poll.options[1].totalVotes})</h2>
-              </section>
-              <section>
-                <h1>{poll.options[2].optionDescription}</h1>
-                <h2> ({poll.options[2].totalVotes})</h2>
-              </section>
             </div>
             <button className="buttonOpen" onClick={handleOpenModal}>
               ABRIR

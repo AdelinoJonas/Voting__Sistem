@@ -4,129 +4,32 @@ import Card from "../../components/Card";
 import CardRegisterPoll from "../../components/CardRegisterPoll";
 import "./style.css";
 
-const polls = [
-  {
-    id: 1,
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    options: [
-      {
-        idOption: 1,
-        optionDescription: "Alternativa A",
-        totalVotes: 0,
-      },
-      {
-        idOption: 2,
-        optionDescription: "Alternativa B",
-        totalVotes: 0,
-      },
-      {
-        idOption: 3,
-        optionDescription: "Alternativa C",
-        totalVotes: 0,
-      },
-    ],
-  },
-  {
-    id: 2,
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    options: [
-      {
-        idOption: 1,
-        optionDescription: "Alternativa A",
-        totalVotes: 0,
-      },
-      {
-        idOption: 2,
-        optionDescription: "Alternativa B",
-        totalVotes: 0,
-      },
-      {
-        idOption: 3,
-        optionDescription: "Alternativa C",
-        totalVotes: 0,
-      },
-    ],
-  },
-  {
-    id: 3,
-    registerDate: "2017-8-16",
-    startDate: "2017-8-16",
-    endDate: "2017-8-16",
-    questionDescription: "O projeto está ficando bom?",
-    title: "Acertividade",
-    options: [
-      {
-        idOption: 1,
-        optionDescription: "Alternativa A",
-        totalVotes: 0,
-      },
-      {
-        idOption: 2,
-        optionDescription: "Alternativa B",
-        totalVotes: 0,
-      },
-      {
-        idOption: 3,
-        optionDescription: "Alternativa C",
-        totalVotes: 0,
-      },
-    ],
-  },
-];
-
 function Home() {
   const [openModal, setOpenModal] = useState(false);
-  const [dataPoll, setDataPoll] = useState(polls);
   const [currentPoll, setCurrentPoll] = useState(false);
+  const [pollsList, setPollsList] = useState([]);
   const [reload, setReload] = useState(false);
 
-  console.log(dataPoll);
+  console.log({ logState: pollsList });
 
   useEffect(() => {
-    handleLoadPolls();
-  }, [reload]);
-
-  useEffect(() => {
-    if (currentPoll) {
-      return setOpenModal(true);
-    }
-  }, [currentPoll]);
-
-  useEffect(() => {
-    if (!openModal) {
-      handleLoadPolls();
-    }
-
-    if (!openModal && currentPoll) {
-      setCurrentPoll(false);
-    }
-  }, [openModal, currentPoll]);
-
-  const handleOrderPoll = (newPoll) => {
-    setDataPoll(newPoll);
-  };
-
-  async function handleLoadPolls() {
-    const response = await fetch("http://localhost:80/api/polls", {
-      method: "GET",
-    });
-
-    const dataApi = await response.json();
-    setDataPoll(dataApi);
-  }
+    handleGetPolls();
+  }, []);
 
   const handleOpenModal = () => {
     setOpenModal(true);
   };
 
+  async function handleGetPolls() {
+    const response = await fetch("http://localhost:80/api/polls", {
+      method: "GET",
+    });
+
+    const data = await response.json();
+    console.log({ patrivl: data });
+    console.log("sdkdos");
+    setPollsList(data.result);
+  }
   return (
     <div className="container-home">
       <div className="headerHome">
@@ -138,8 +41,10 @@ function Home() {
         <CardRegisterPoll
           setOpenModal={setOpenModal}
           openModal={setOpenModal}
-          currentPoll = {currentPoll}
-          setCurrentPoll = {setCurrentPoll}
+          currentPoll={currentPoll}
+          setCurrentPoll={setCurrentPoll}
+          pollsList={pollsList}
+          setPollsList={setPollsList}
         />
       )}
       <section className="section-polls">
@@ -147,7 +52,7 @@ function Home() {
           <Card
             openModal={openModal}
             setOpenModal={setOpenModal}
-            dataPoll = {dataPoll}
+            pollsList={pollsList}
           />
         </div>
       </section>

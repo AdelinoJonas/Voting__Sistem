@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
 
-function CardRegisterPoll({
-  openModal,
-  setOpenModal,
-  setCurrentPoll,
-  currentPoll,
-}) {
-  const defaltValuesForm = {
+function CardRegisterPoll({ setOpenModal }) {
+  const defaultValuesQuestion = {
     registerDate: "",
     startDate: "",
     endDate: "",
@@ -17,20 +12,23 @@ function CardRegisterPoll({
     options: [
       {
         optionDescription: "",
-        totalVotes: 0,
       },
       {
         optionDescription: "",
-        totalVotes: 0,
       },
       {
         optionDescription: "",
-        totalVotes: 0,
       },
     ],
   };
 
-  const [formData, setFormData] = useState(defaltValuesForm);
+  const [formQuestion, setFormQuestion] = useState(defaultValuesQuestion);
+
+  console.log(formQuestion);
+
+  const handleDataChange = (e) => {
+    setFormQuestion(formQuestion);
+  };
 
   async function registerPoll(body) {
     return await fetch("http://localhost:80/api/poll", {
@@ -42,67 +40,55 @@ function CardRegisterPoll({
     });
   }
 
-  const data = formData;
-
-  async function handleSubmit(e) {
-    if (
-      !data.startDate &&
-      !data.endDate &&
-      !data.questionDescription &&
-      !data.title &&
-      !data.options.optionDescription &&
-      !data.options.totalVotes &&
-      !data.options.totalVotes
-    ) {
-      alert("Totos os campos são obrigatórios!");
-    } else {
-      alert("Enquete cadastrada com Sucesso!");
-    }
-
-    const body = {
-      registerDate: e.target.value,
-      startDate: e.target.value,
-      endDate: e.target.value,
-      questionDescription: e.target.value,
-      title: e.target.value,
-      options: [
-        {
-          optionDescription: e.target.value,
-          totalVotes: e.target.value,
-        },
-        {
-          optionDescription: e.target.value,
-          totalVotes: e.target.value,
-        },
-        {
-          optionDescription: e.target.value,
-          totalVotes: e.target.value,
-        },
-      ],
-    };
-
-    e.preventDefault();
-
-    await registerPoll(body);
-    setOpenModal(false);
-  }
-
-  const handleDataChange = (e) => {
-    setFormData(e.target.value);
-  };
-
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const body = {
+      startDate: formQuestion.startDate,
+      endDate: formQuestion.startDate,
+      questionDescription: formQuestion.startDate,
+      title: formQuestion.startDate
+    }
+      // options: [
+      //   {
+      //     optionDescription: newDataOptions.startDate,
+      //   },
+      //   {
+      //     optionDescription: newDataOptions.startDate,
+      //   },
+      //   {
+      //     optionDescription: newDataOptions.startDate,
+      //   },
+      // ],      
+      
+      //A PARTE DE BAIXO FAZ PARTE DO IF DO OPTIONS
+      // !newData.options.optionDescription &&
+      // newData.options < 3
+  //   };
+
+  if (!formQuestion.startDate &&
+    !formQuestion.endDate &&
+    !formQuestion.questionDescription &&
+    !formQuestion.title
+  ) {
+    alert("Deve ter no minimo 3 opções!");
+    alert("Totos os campos são obrigatórios!");
+  } else {
+    alert("Enquete cadastrada com Sucesso!");
+  }
+   
+    await registerPoll(body);
+    setOpenModal(false);
+  }
+
   return (
     <div className="backgroundRegister">
       <div className="registerContent">
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <div className="container-titleRegister">
             <div className="titleRegisterRegister">
               <img
@@ -121,10 +107,10 @@ function CardRegisterPoll({
                     id="startDate"
                     className="spanDateRegister"
                     type="date"
-                    value={data.startDate}
+                    value={formQuestion.startDate}
                     required
                     placeholder="DD/MM/AAAA"
-                    onChange={(e) => handleDataChange(e)}
+                    // onChange={(e) => handleDataChange(e.target)}
                   />
                 </section>
                 <section>
@@ -132,12 +118,10 @@ function CardRegisterPoll({
                   <input
                     className="spanDateRegister"
                     type="date"
-                    value={data.endDate}
+                    value={formQuestion.endDate}
                     required
                     placeholder="DD/MM/AAAA"
-                    onChange={(e) => {
-                      handleDataChange(e);
-                    }}
+                    // onChange={(e) => handleDataChange(e.target)}
                   />
                 </section>
               </div>
@@ -145,12 +129,10 @@ function CardRegisterPoll({
                 <label>Título da enquete: </label>
                 <input
                   type="text"
-                  value={data.title}
+                  value={formQuestion.title}
                   required
                   placeholder="TÍTULO"
-                  onChange={(e) => {
-                    handleDataChange(e);
-                  }}
+                  // onChange={(e) => handleDataChange(e.target)}
                 />
               </div>
             </div>
@@ -159,12 +141,10 @@ function CardRegisterPoll({
             <label>Descreva a enquete:</label>
             <textarea
               type="text"
-              value={data.questionDescription}
+              value={formQuestion.questionDescription}
               required
               placeholder="Descrição da Enquete."
-              onChange={(e) => {
-                handleDataChange(e);
-              }}
+              // onChange={(e) => handleDataChange(e.target)}
             />
           </div>
           <div className="optionsContainerRegister">
@@ -173,12 +153,10 @@ function CardRegisterPoll({
               <br />
               <input
                 type="text"
-                value={data.option1}
+                // value={form.options[0]}
                 required
                 placeholder="Descrição opção 1"
-                onChange={(e) => {
-                  handleDataChange(e);
-                }}
+                // onChange={(e) => handleDataChange(e.target)}
               />
             </section>
             <section>
@@ -186,12 +164,10 @@ function CardRegisterPoll({
               <br />
               <input
                 type="text"
-                value={data.option2}
+                // value={form.options[1]}
                 required
                 placeholder="Descrição opção 2"
-                onChange={(e) => {
-                  handleDataChange(e);
-                }}
+                // onChange={(e) => handleDataChange(e.target)}
               />
             </section>
             <section>
@@ -199,12 +175,10 @@ function CardRegisterPoll({
               <br />
               <input
                 type="text"
-                value={data.option3}
+                // value={form.options[3]}
                 required
                 placeholder="Descrição opção 3"
-                onChange={(e) => {
-                  handleDataChange(e);
-                }}
+                // onChange={(e) => handleDataChange(e.target)}
               />
             </section>
           </div>
