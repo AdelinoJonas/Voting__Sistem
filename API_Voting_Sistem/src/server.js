@@ -16,7 +16,4 @@ server.use(bodyParser.urlencoded({
 
 server.use('/api', routes);
 
-
-server.listen(process.env.PORT, () => {
-    process.env.PORT
-})
+server.listen(process.env.PORT)

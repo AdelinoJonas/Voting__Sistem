@@ -62,7 +62,6 @@ module.exports = {
                 reject(error);
                 return;
               }
-
               resolve(results);
             });
           });
@@ -115,7 +114,6 @@ module.exports = {
     totalVotes
   }) => {
     return new Promise((resolve, reject) => {
-
       const sql = "UPDATE poll_options SET totalVotes = totalVotes + 1 where id = ?";
       db.query(sql,
         [id],
