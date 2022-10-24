@@ -3,7 +3,7 @@ const db = require("../db");
 module.exports = {
   getAll: () => {
     return new Promise((resolve, reject) => {
-      const sql = "SELECT id, registerDate, startDate, endDate, title, questionDescription FROM poll_questions";
+      const sql = "SELECT id, date_format(registerDate, '%Y-%m-%d') as registerDate, date_format(startDate, '%Y-%m-%d') as startDate, date_format(endDate, '%Y-%m-%d') as endDate, title, questionDescription FROM poll_questions";
 
       db.query(sql, (error, results) => {
         if (error) {
@@ -16,7 +16,7 @@ module.exports = {
   },
   getPoll: (id) => {
     return new Promise((resolve, reject) => {
-      const sql = "SELECT * FROM poll_questions WHERE poll_questions.id = ?";
+      const sql = "SELECT id, date_format(registerDate, '%Y-%m-%d') as registerDate, date_format(startDate, '%Y-%m-%d') as startDate, date_format(endDate, '%Y-%m-%d') as endDate, title, questionDescription FROM poll_questions WHERE poll_questions.id = ?";
 
       db.query(sql, [id], (error, results) => {
         if (error) {
