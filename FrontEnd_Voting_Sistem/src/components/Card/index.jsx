@@ -2,7 +2,7 @@ import "./style.css";
 import React, { useState, useEffect } from "react";
 import FullPollCard from "../FullPollCard";
 
-function Card({pollsList}) {
+function Card({pollsList, setPollsList}) {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -44,7 +44,7 @@ function Card({pollsList}) {
         );
       })}
       {openModal && (
-        <FullPollCard setOpenModal={setOpenModal} openModal={openModal} />
+        <FullPollCard setOpenModal={setOpenModal} openModal={openModal} pollsList={pollsList}/>
       )}
     </>
   );

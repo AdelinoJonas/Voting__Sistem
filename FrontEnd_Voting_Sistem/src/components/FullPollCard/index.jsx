@@ -1,14 +1,16 @@
 import React from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function FullPollCard({ setOpenModal, pollsList, reload, setReload }) {
+function FullPollCard({ setOpenModal, reload, setReload, pollsList}) {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
   const [idItemDelete, setIdItemDelete] = useState(null);
+  const [currentPoll, setCurrentPoll] = useState();
+  const [pollId, setPollId] = useState();
 
   async function handleDeleteItem() {
     await fetch(`http://localhost:80/api/poll/${idItemDelete}`, {
@@ -17,6 +19,21 @@ function FullPollCard({ setOpenModal, pollsList, reload, setReload }) {
     setIdItemDelete(null);
     setReload(!reload);
   }
+
+  useEffect(() => {
+    handleGetPoll();
+  }, []);
+
+  async function handleGetPoll() {
+    const response = await fetch("http://localhost:80/api/poll/1", {
+      method: "GET",
+    });
+
+    const data = await response.json();
+    setPollId(data.result);
+    console.log(pollId);
+  }
+
   return (
     <>
       {pollsList.map((poll, index) => {
@@ -53,7 +70,7 @@ function FullPollCard({ setOpenModal, pollsList, reload, setReload }) {
                   </section>
                   <section>
                     <h3> Data de Término: </h3>
-                    <h2 className="spanDateModal"> {poll.startDate} </h2>
+                    <h2 className="spanDateModal"> {poll.Date} </h2>
                   </section>
                 </div>
                 <h1> {poll.title} </h1>
