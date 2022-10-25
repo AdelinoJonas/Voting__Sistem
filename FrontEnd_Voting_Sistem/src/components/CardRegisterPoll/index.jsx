@@ -3,41 +3,13 @@ import "./style.css";
 import closeIcon from "../../assets/close.svg";
 
 function CardRegisterPoll({ setOpenModal }) {
-  const defaultQuestionValues = {
-    startDate: "",
-    endDate: "",
-    title: "",
-    questionDescription: ""
-  };
-  const defaultOptionValues = {
-    options: [
-      "",
-      "",
-      "",
-    ],
-  };
+  const [form, setForm] = useState({});
 
-  const [form, setForm] = useState([defaultQuestionValues]);
-  const [optionsArray, setOptionsArray] = useState(defaultOptionValues);
-  const [option1, setOption1] = useState("");
-  const [option2, setOption2] = useState("");
-  const [option3, setOption3] = useState("");
-
-  
-  const handleForm = () => {
-    console.log(form.startDate);
+  const handleForm = (e) => {
+    form[e.target.id] = e.target.value;
     setForm(form);
   };
-  const handleOption1 = (e) => {
-    setOptionsArray(option1);
-  };
-  const handleOption2 = (e) => {
-    setOption2({...option2});
-  };
-  const handleOption3 = (e) => {
-    setOption3({...option3});
-  };
-
+  
   const handleCloseModal = () => {
     setOpenModal(false);
   };
@@ -52,114 +24,41 @@ function CardRegisterPoll({ setOpenModal }) {
     });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
+
     if (
       !form.startDate &&
       !form.endDate &&
       !form.questionDescription &&
       !form.title &&
-      !optionsArray.length < 3
+      !form.option1 &&
+      !form.option2 &&
+      !form.option3
     ) {
       alert("Deve ter no mínimo 3 opções!");
       alert("Totos os campos são obrigatórios!");
-    } else {
-      alert("Enquete cadastrada com Sucesso!");
     }
 
     const body = {
-          startDate: form.startDate,
-          endDate: form.endDate,
-          title: form.title,
-          questionDescription: form.questionDescription,
-          options: optionsArray,
-        };
+      startDate: form.startDate,
+      endDate: form.endDate,
+      title: form.title,
+      questionDescription: form.questionDescription,
+      options: [form.option1, form.option2, form.option3],
+    }
 
-    console.log(form.startDate);
-
-    setOptionsArray({option1,option2, option3})
-    
     await registerPoll(body);
-    handleCloseModal();
+    console.log(body);
+
+    alert("Enquete cadastrada com sucesso!");
+    // handleCloseModal();
   }
 
-  // const [startDate, setStartDate] = useState("");
-  // const [endDate, setEndDate] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [questionDescription, setQuestionDescription] = useState("");
-  // // const [optionsArray, setOptionsArray] = useState([]);
-  // const [option1, setOption1] = useState("");
-
-
-  // console.log(startDate, endDate, title, questionDescription, option1);
-
-  // const handleStartDate = (e) => {
-  //   setStartDate(e.target.value);
-  // };
-
-  // const handleEndDate = (e) => {
-  //   setEndDate(e.target.value);
-  // };
-
-  // const handleTitle = (e) => {
-  //   setTitle(e.target.value);
-  // };
-
-  // const handleQuestionDescription = (e) => {
-  //   setQuestionDescription(e.target.value);
-  // };
-
-  // const handleOption1 = (e) => {
-  //   // console.log();
-  //   setOption1(e.target.value);
-  // };
-
-  // async function registerPoll(body) {
-  //   return await fetch("http://localhost:80/api/poll", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(body),
-  //   });
-  // }
-
-  // async function handleSubmit(e) {
-  //   if (
-  //     !startDate &&
-  //     !endDate &&
-  //     !questionDescription &&
-  //     !title &&
-  //     !option1 
-  //     // !option2 &&
-  //     // !option3
-  //   ) {
-  //     alert("Deve ter no mínimo 3 opções!");
-  //     alert("Totos os campos são obrigatórios!");
-  //   } else {
-  //     alert("Enquete cadastrada com Sucesso!");
-  //   }
-
-  //   const body = {
-  //     startDate: startDate,
-  //     endDate: endDate,
-  //     title: title,
-  //     questionDescription: questionDescription,
-  //     options: [
-  //        option1,
-  //     ],
-  //   };
-  //   await registerPoll(body);
-  //   e.preventDefault();
-  //   console.log(body);
-  // };
-  
   return (
     <div className="backgroundRegister">
       <div className="registerContent">
-        <form
-          onSubmit={(e)=>{handleSubmit(e)}}
-        >
+        <form onSubmit={handleSubmit}>
           <div className="container-titleRegister">
             <div className="titleRegisterRegister">
               <img
@@ -181,7 +80,7 @@ function CardRegisterPoll({ setOpenModal }) {
                     value={form.startDate}
                     required
                     placeholder="DD/MM/AAAA"
-                    onChange={()=>handleForm()}
+                    onChange={(e) => handleForm(e)}
                   />
                 </section>
                 <section>
@@ -193,7 +92,7 @@ function CardRegisterPoll({ setOpenModal }) {
                     value={form.endDate}
                     required
                     placeholder="DD/MM/AAAA"
-                    onChange={()=>handleForm()}
+                    onChange={(e) => handleForm(e)}
                   />
                 </section>
               </div>
@@ -205,7 +104,7 @@ function CardRegisterPoll({ setOpenModal }) {
                   value={form.title}
                   required
                   placeholder="TÍTULO"
-                  onChange={()=>handleForm()}
+                  onChange={(e) => handleForm(e)}
                 />
               </div>
             </div>
@@ -213,11 +112,12 @@ function CardRegisterPoll({ setOpenModal }) {
           <div className="showDescriptionRegister">
             <label>Descreva a enquete:</label>
             <textarea
+              id="questionDescription"
               type="text"
               value={form.questionDescription}
               required
               placeholder="Descrição da Enquete."
-              onChange={()=>handleForm()}
+              onChange={(e) => handleForm(e)}
             />
           </div>
           <div className="optionsContainerRegister">
@@ -225,40 +125,43 @@ function CardRegisterPoll({ setOpenModal }) {
               <label>Opção 1:</label>
               <br />
               <input
+                id="option1"
                 type="text"
-                value={option1}
+                value={form.option1}
                 required
                 placeholder="Descrição opção 1"
-                onChange={()=>handleOption1()}
+                onChange={(e) => handleForm(e)}
               />
             </section>
             <section>
               <label>Opção 2:</label>
               <br />
               <input
+                id="option2"
                 type="text"
-                value={option2}
+                value={form.option2}
                 required
                 placeholder="Descrição opção 2"
-                onChange={()=>handleOption2()}
+                onChange={(e) => handleForm(e)}
               />
             </section>
             <section>
               <label>Opção 3:</label>
               <br />
               <input
+                id="option3"
                 type="text"
-                value={option3}
+                value={form.option3}
                 required
                 placeholder="Descrição opção 3"
-                onChange={()=>handleOption3()}
+                onChange={(e) => handleForm(e)}
               />
             </section>
           </div>
+          <button type="submit" className="buttonRegister">
+            POSTAR ENQUETE
+          </button>
         </form>
-        <button type="submit" className="buttonRegister">
-          POSTAR ENQUETE
-        </button>
       </div>
     </div>
   );

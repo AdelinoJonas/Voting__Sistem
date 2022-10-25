@@ -28,10 +28,10 @@ function FullPollCard({ setOpenModal, reload, setReload, pollsList}) {
     const response = await fetch("http://localhost:80/api/poll/1", {
       method: "GET",
     });
-
+    
     const data = await response.json();
     setPollId(data.result);
-    console.log(pollId);
+    console.log(data);
   }
 
   return (
