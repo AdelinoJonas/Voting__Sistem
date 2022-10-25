@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
 
-function CardRegisterPoll({ setOpenModal }) {
+function CardRegisterPoll({ setOpenModal, setReload }) {
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
@@ -50,9 +50,9 @@ function CardRegisterPoll({ setOpenModal }) {
 
     await registerPoll(body);
     console.log(body);
-
     alert("Enquete cadastrada com sucesso!");
-    // handleCloseModal();
+    handleCloseModal()
+    setReload(true);
   }
 
   return (
@@ -65,7 +65,7 @@ function CardRegisterPoll({ setOpenModal }) {
                 src={closeIcon}
                 className="closeButton"
                 alt="close modal"
-                onClick={() => setOpenModal(false)}
+                onClick={handleCloseModal}
               />
               <div className="postPut">
                 <button className="post">CADASTRAR</button>

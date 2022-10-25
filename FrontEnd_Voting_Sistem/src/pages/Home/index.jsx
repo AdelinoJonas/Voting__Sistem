@@ -37,8 +37,8 @@ function Home() {
         <CardRegisterPoll
           setOpenModal={setOpenModal}
           openModal={setOpenModal}
-          currentPoll = {currentPoll}
-          setCurrentPoll = {setCurrentPoll}
+          handleGetPolls={handleGetPolls}
+          setReload={setReload}
         />
       )}
       <section className="section-polls">
