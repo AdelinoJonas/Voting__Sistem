@@ -1,44 +1,58 @@
 import React from "react";
 import "./style.css";
 import closeIcon from "../../assets/close.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 
-function FullPollCard({ setOpenModal, reload, setReload, pollsList}) {
+function FullPollCard({ setOpenModal, setReload, pollById }) {
+
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
   const [idItemDelete, setIdItemDelete] = useState(null);
-  const [currentPoll, setCurrentPoll] = useState();
-  const [pollId, setPollId] = useState();
+  const [totalVotes, setTotalVotes] = useState(0);
+  const [checked, setChecked] = useState(false);
+
+  console.log('fullPollCard', checked, totalVotes);
+  
+  const handleChooseOption = () => {
+    setChecked(true);
+  };
+    
+  const handleVote = ()=>{
+    let votes = checked ? totalVotes + 1 : totalVotes;
+    setTotalVotes(votes);
+    console.log('votes', votes);
+  }
 
   async function handleDeleteItem() {
     await fetch(`http://localhost:80/api/poll/${idItemDelete}`, {
       method: "DELETE",
     });
     setIdItemDelete(null);
-    setReload(!reload);
+    setReload(true);
   }
 
-  useEffect(() => {
-    handleGetPoll();
-  }, []);
-
-  async function handleGetPoll() {
-    const response = await fetch("http://localhost:80/api/poll/1", {
-      method: "GET",
+  async function handlePostVote() {
+    handleVote();
+    await fetch(`http://localhost:80/api/option/2/vote`, {
+      method: "PUT",
     });
-    
-    const data = await response.json();
-    setPollId(data.result);
-    console.log(data);
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    await handlePostVote();
+
+    // handleCloseModal();
   }
 
   return (
     <>
-      {pollsList.map((poll, index) => {
-        return (
-          <div className="backgroundModal" key={index}>
+      {
+        pollById && (
+          <div className="backgroundModal">
             <div className="modalContent">
               <div className="container-titleModal">
                 <div className="titleRegisterModal">
@@ -52,50 +66,49 @@ function FullPollCard({ setOpenModal, reload, setReload, pollsList}) {
                     <button className="put"> EDITAR </button>
                     <button
                       className="delete"
-                      onClick={(e) => {
-                        handleDeleteItem(e);
-                      }}
+                      onClick={(e) =>
+                        {handleDeleteItem(e)}
+                      }
                     >
                       EXCLUIR
                     </button>
                   </div>
                   <div className="createdRegisterModal">
-                    <h3> Criado em: </h3> <h2>{poll.registerDate}</h2>
+                    <h3> Criado em: </h3> <h2>{pollById.registerDate}</h2>
                   </div>
                 </div>
                 <div className="sheduleModal">
                   <section>
                     <h3> Data de início: </h3>
-                    <h2 className="spanDateModal"> {poll.startDate} </h2>
+                    <h2 className="spanDateModal"> {pollById.startDate} </h2>
                   </section>
                   <section>
                     <h3> Data de Término: </h3>
-                    <h2 className="spanDateModal"> {poll.Date} </h2>
+                    <h2 className="spanDateModal"> {pollById.endDate} </h2>
                   </section>
                 </div>
-                <h1> {poll.title} </h1>
+                <h1> {pollById.title} </h1>
               </div>
               <div className="showdescriptionModal">
                 <h2 className="textDescriptionModal">
-                  {poll.questionDescription}
+                  {pollById.questionDescription}
                 </h2>
               </div>
               <div className="optionsContainerModal">
-                <section>
-                  <h1> {poll.option1} </h1> <h2> ({poll.votesOption1}) </h2>
-                </section>
-                <section>
-                  <h1> {poll.option2} </h1> <h2> ({poll.votesOption1}) </h2>
-                </section>
-                <section>
-                  <h1> {poll.option3} </h1> <h2> ({poll.votesOption1}) </h2>
-                </section>
+                {pollById.options.map( (e, id) => { return(
+                  <section key={id}>
+                    <input type="radio" id="vote" name="totalVotes" onChange={handleChooseOption}/>
+                    <label htmlFor="vote"> {e.optionDescription} </label>
+                    <h2> ({e.totalVotes}) </h2> 
+                  </section>
+                  )
+                })}
+              <button className="buttonVote" onClick={handleSubmit}> VOTAR </button>
               </div>
-              <button className="buttonVote"> VOTAR </button>
             </div>
           </div>
-        );
-      })}
+        )
+      }
     </>
   );
 }

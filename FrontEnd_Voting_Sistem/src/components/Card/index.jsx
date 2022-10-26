@@ -2,14 +2,30 @@ import "./style.css";
 import React, { useState, useEffect } from "react";
 import FullPollCard from "../FullPollCard";
 
-function Card({pollsList, setPollsList}) {
+function Card({pollsList, setPollsList, reload, setReload}) {
   const [openModal, setOpenModal] = useState(false);
+  const [pollById, setPollById] = useState([]);
 
+  console.log('pollById-card',pollById);
+  
+  useEffect((reload) => {
+    handleGetPoll();
+  }, [reload]);
+  
   const handleOpenModal = () => {
     setOpenModal(true);
-    console.log(openModal);
+    // setReload(true);
   };
-
+  
+  async function handleGetPoll() {
+    const response = await fetch("http://localhost:80/api/poll/2", {
+      method: "GET",
+    });
+    
+    const data = await response.json();
+    setPollById(data.result);
+  }
+  
   return (
     <>
       {pollsList.map((poll, index) => {
@@ -44,7 +60,7 @@ function Card({pollsList, setPollsList}) {
         );
       })}
       {openModal && (
-        <FullPollCard setOpenModal={setOpenModal} openModal={openModal} pollsList={pollsList}/>
+        <FullPollCard setOpenModal={setOpenModal} openModal={openModal} pollById={pollById} setPollById={setPollById}/>
       )}
     </>
   );
